@@ -45,8 +45,9 @@
   "nosotros": {
     "titulo": "Who we are",
     "p1": "River of Grace Church was born in Hatillo, a small town between the mountains and the Savegre River on Costa Rica's southern Pacific coast. Some of us have lived here all our lives; others came from abroad, and more than half of our church family speaks English. That's why we do everything in both languages, and neither one is an afterthought.",
-    "p2": "For us, the church isn't the building, although we have one and take good care of it. The church is the people: sharing a table, visiting each other's homes, going on outings, crying and celebrating together. Preaching and songs matter, but faith is lived on Monday too.",
-    "historia": "<span class='pendiente'>Short history: founding year and how the church began (to be confirmed).</span>"
+    "p2": "For us, the church isn't the building, although we have one and take good care of it. The church is the people. We don't believe there is only one format: like the first church, we gather in homes, around a table, or walking together. Preaching and songs matter, but faith is lived on Monday too.",
+    "historia": "It all began in November 2019 as the Hatillo Mission Project, in an old house we were renting. The pandemic arrived soon after and, through many difficulties, we kept meeting and proclaiming that we are saved by God's grace. It wasn't always a welcome message, and there were lonely seasons; but little by little people joined who believed it and lived it, and we began to see the fruit in their lives and in their families.",
+    "historia2": "From the very beginning, First Baptist Church of Edom, Texas, has walked alongside us. They took an interest in Hatillo and the surrounding communities and built the building where we meet today. Today we are a family with people from Costa Rica, Nicaragua, South Africa, Canada and the United States, and we hold on to the same conviction: the gospel is not only a message, it is also action. We believe that, through his church, Christ can give a real embrace to those who need it."
   },
   "creencias": {
     "titulo": "How we live our faith",
@@ -102,7 +103,7 @@
     "dsl_t": "Partnership with From Silence to Freedom",
     "dsl_p": "<span class='pendiente'>Del Silencio a la Libertad (From Silence to Freedom) is an association in Costa Rica with legal backing in the United States. Text about its work and why we believe this partnership is needed: to be confirmed with Juan before publishing.</span>",
     "misiones_t": "Sister churches and mission teams",
-    "misiones_p": "We gladly welcome sister churches and mission teams, like Cornerstone Church, who come to serve shoulder to shoulder with us. Every visit leaves friendships that last for years."
+    "misiones_p": "We gladly welcome sister churches and mission teams, like First Baptist Church of Edom (Texas) and Cornerstone Church, who come to serve shoulder to shoulder with us. Every visit leaves friendships that last for years."
   },
   "formacion": {
     "titulo": "Growing in the Word",

@@ -45,8 +45,9 @@
   "nosotros": {
     "titulo": "Quiénes somos",
     "p1": "Iglesia Río de Gracia nació en Hatillo, un pueblo pequeño entre las montañas y el río Savegre, en el Pacífico Sur de Costa Rica. Somos vecinos de toda la vida y personas que llegaron de otros países, y más de la mitad de nuestra familia habla inglés. Por eso todo lo hacemos en dos idiomas, y ninguno es de segunda.",
-    "p2": "Para nosotros la iglesia no es el edificio, aunque tenemos uno y lo cuidamos con cariño. La iglesia son las personas: sentarse a la mesa juntos, visitarse en las casas, salir de paseo, llorar y celebrar juntos. El púlpito y las canciones son importantes, pero la fe se vive también el lunes.",
-    "historia": "<span class='pendiente'>Historia breve: año de fundación y cómo comenzó la iglesia (por confirmar).</span>"
+    "p2": "Para nosotros la iglesia no es el edificio, aunque tenemos uno y lo cuidamos con cariño. La iglesia son las personas. No creemos que exista un único formato: como la primera iglesia, nos encontramos en las casas, alrededor de una mesa o caminando juntos. El púlpito y las canciones son importantes, pero la fe se vive también el lunes.",
+    "historia": "Todo comenzó en noviembre de 2019 como el Proyecto Misionero Hatillo, en una casa antigua que rentábamos. Poco después llegó la pandemia y, entre dificultades, seguimos reuniéndonos y anunciando que somos salvos por la gracia de Dios. No siempre fue un mensaje bien recibido, y hubo momentos de soledad; pero poco a poco se fueron sumando personas que lo creyeron y lo vivieron, y empezamos a ver el fruto en sus vidas y en sus familias.",
+    "historia2": "Desde el principio nos ha acompañado la Primera Iglesia Bautista de Edom, Texas, que se interesó en Hatillo y en las comunidades vecinas y construyó el edificio donde hoy nos reunimos. Hoy somos una familia con personas de Costa Rica, Nicaragua, Sudáfrica, Canadá y Estados Unidos, y seguimos con la misma convicción: el evangelio no es solo un mensaje, también es acción. Creemos que, a través de su iglesia, Cristo puede dar un abrazo real a quien lo necesita."
   },
   "creencias": {
     "titulo": "Cómo vivimos la fe",
@@ -102,7 +103,7 @@
     "dsl_t": "Alianza con Del Silencio a la Libertad",
     "dsl_p": "<span class='pendiente'>Del Silencio a la Libertad es una asociación en Costa Rica con respaldo legal en Estados Unidos. Texto sobre a qué se dedica y por qué consideramos necesaria esta alianza: pendiente de confirmar con Juan antes de publicar.</span>",
     "misiones_t": "Iglesias hermanas y equipos misioneros",
-    "misiones_p": "Recibimos con alegría a iglesias hermanas y equipos misioneros, como Cornerstone Church, que vienen a servir hombro a hombro con nosotros. Cada visita deja amistades que duran años."
+    "misiones_p": "Recibimos con alegría a iglesias hermanas y equipos misioneros, como la Primera Iglesia Bautista de Edom (Texas) y Cornerstone Church, que vienen a servir hombro a hombro con nosotros. Cada visita deja amistades que duran años."
   },
   "formacion": {
     "titulo": "Crecer en la Palabra",
