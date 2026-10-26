@@ -277,9 +277,8 @@ function vistaInicio() {
   }
   if (perfil() === 'tesoreria') {
     return '<div class="grandes">' +
-      botonGrande('📷', 'Subir una factura', 'Toma la foto y yo leo el monto', "formulario('factura')") +
       botonGrande('➕', 'Anotar ofrenda o venta', 'Lo que entró a la iglesia', "formulario('entrada')") +
-      botonGrande('➖', 'Anotar un gasto', 'Lo que se pagó o compró', "formulario('salida')") +
+      botonGrande('➖', 'Anotar un gasto', 'Lo que se pagó o compró (con foto de la factura si la tienes)', "formulario('salida')") +
       botonGrande('🏦', 'Depósito o retiro del banco', 'Cuando llevas o sacas dinero', "formulario('banco')") +
       botonGrande('📄', 'Ver el reporte del mes', 'Todo ordenado, listo para presentar', 'verReporte()') +
       '</div>';
@@ -335,7 +334,6 @@ function vistaPublicar() {
       <button data-tipo="anuncio">📢 Anuncio</button>
       <button data-tipo="encuesta">📋 Encuesta</button>
     </div>
-    ${datos.finanzas ? '<button class="secundario" data-tipo="factura" id="btn-factura">🧾 Subir una factura</button>' : ''}
     ${datos.usuario.supervision ? '<button class="secundario" data-tipo="visita" id="btn-visita">✈️ Anotar visita de misioneros</button>' : ''}
 
     <div id="f-grupos"><label>¿A qué grupo(s)?</label><div class="opciones">${grupos || '<div class="vacio">No hay grupos activados.</div>'}</div></div>
@@ -441,34 +439,27 @@ async function enviarPublicacion() {
 
 const FORMULARIOS = {
   entrada: ['➕ Ofrenda o venta', '¿Cuánto entró y de qué?', 'Por ejemplo: 85000 ofrenda del sábado'],
-  salida: ['➖ Gasto', '¿Cuánto se gastó y en qué?', 'Por ejemplo: 12500 productos de limpieza'],
+  salida: ['➖ Gasto', '¿Cuánto se gastó y en qué?', 'Por ejemplo: 12500 limpieza'],
   banco: ['🏦 Depósito o retiro', '¿Fue depósito o retiro? ¿Cuánto y por qué?', 'Por ejemplo: depósito de 150000 de las ofrendas de octubre']
 };
 
 function formulario(tipo) {
   const volver = '<button class="volver" onclick="mostrar(\'inicio\')">← Volver</button>';
-  if (tipo === 'factura') {
-    $('#contenido').innerHTML = volver + `<div class="tarjeta"><h2>📷 Subir una factura</h2>
+  const [titulo, pregunta, ejemplo] = FORMULARIOS[tipo];
+  const foto = tipo === 'salida' ? `<label>Foto de la factura (si la tienes)</label>
       <input type="file" id="foto" accept="image/*" capture="environment">
-      <img id="previa" class="foto-previa oculto" alt="Vista previa de la factura">
-      <label>Nota (opcional)</label><input type="text" id="nota" placeholder="Por ejemplo: compra para el festival">
-      <button id="enviar">Subir factura</button></div>`;
-    $('#foto').onchange = () => { const f = $('#foto').files[0]; if (f) { $('#previa').src = URL.createObjectURL(f); $('#previa').classList.remove('oculto'); } };
-    $('#enviar').onclick = async () => {
-      const f = $('#foto').files[0];
-      if (!f) return aviso('Toma o elige la foto de la factura.', 'error');
-      await enviarSimple($('#enviar'), 'factura', { imagen: await fotoComoBase64(f), tipo: 'image/jpeg', nota: $('#nota').value });
-    };
-  } else {
-    const [titulo, pregunta, ejemplo] = FORMULARIOS[tipo];
-    $('#contenido').innerHTML = volver + `<div class="tarjeta"><h2>${titulo}</h2>
-      <label>${pregunta}</label><textarea id="texto" placeholder="${ejemplo}"></textarea>
-      <button id="enviar">Anotar</button></div>`;
-    $('#enviar').onclick = () => {
-      if (!$('#texto').value.trim()) return aviso('Escribe el monto y el concepto.', 'error');
-      enviarSimple($('#enviar'), 'movimiento', { tipo, texto: $('#texto').value });
-    };
-  }
+      <img id="previa" class="foto-previa oculto" alt="Vista previa de la factura">` : '';
+  $('#contenido').innerHTML = volver + `<div class="tarjeta"><h2>${titulo}</h2>
+    <label>${pregunta}</label><textarea id="texto" placeholder="${ejemplo}"></textarea>
+    ${foto}<button id="enviar">Anotar</button></div>`;
+  if ($('#foto')) $('#foto').onchange = () => { const f = $('#foto').files[0]; if (f) { $('#previa').src = URL.createObjectURL(f); $('#previa').classList.remove('oculto'); } };
+  $('#enviar').onclick = async () => {
+    if (!$('#texto').value.trim()) return aviso('Escribe el monto y en qué, por ejemplo: 12500 limpieza', 'error');
+    const extra = { tipo, texto: $('#texto').value };
+    const f = $('#foto') && $('#foto').files[0];
+    if (f) { extra.imagen = await fotoComoBase64(f); extra.mime = 'image/jpeg'; }
+    enviarSimple($('#enviar'), 'movimiento', extra);
+  };
   window.scrollTo(0, 0);
 }
 
@@ -479,7 +470,7 @@ async function enviarSimple(boton, accion, extra) {
     if (r.error) { aviso(r.error, 'error'); boton.disabled = false; boton.textContent = 'Intentar de nuevo'; return; }
     tg && tg.HapticFeedback && tg.HapticFeedback.notificationOccurred('success');
     datos = await api('datos');
-    mostrar('inicio');
+    mostrar(perfil() === 'tesoreria' ? 'inicio' : 'finanzas');
     aviso(r.mensaje || 'Listo.', 'exito');
   } catch (e) {
     aviso('No pude enviarlo. Revisa tu internet e intenta de nuevo.', 'error');
@@ -503,7 +494,12 @@ function irPublicar(tipo) {
 function vistaFinanzas() {
   const f = datos.finanzas;
   if (!f) return '';
-  let html = `<div class="tarjeta"><h2>💰 ${esc(f.mes)}</h2><div class="numeros">`;
+  let html = '<div class="grandes">' +
+    botonGrande('➖', 'Anotar un gasto', 'Con foto de la factura si la tienes', "formulario('salida')") +
+    botonGrande('➕', 'Anotar ofrenda o venta', 'Lo que entró', "formulario('entrada')") +
+    botonGrande('🏦', 'Depósito o retiro', 'Banco', "formulario('banco')") +
+    botonGrande('📄', 'Reporte del mes', 'Listo para presentar', 'verReporte()') + '</div>';
+  html += `<div class="tarjeta"><h2>💰 ${esc(f.mes)}</h2><div class="numeros">`;
   Object.keys(f.totales).forEach((m) => {
     const t = f.totales[m];
     html += `<div class="numero">➕ Ingresos<b>${dinero(t.entrada, m)}</b></div><div class="numero">➖ Gastos<b>${dinero(t.salida, m)}</b></div>` +
@@ -521,7 +517,7 @@ function vistaFinanzas() {
   const iconos = { entrada: '➕', salida: '➖', deposito: '🏦⬆', retiro: '🏦⬇' };
   html += '<div class="tarjeta"><h2>Últimos movimientos</h2>' + (f.movimientos.length ? f.movimientos.map((m) =>
     `<div class="fila"><div>${iconos[m.tipo] || '·'} ${esc(m.concepto || m.categoria)}<div class="meta">${esc(m.fecha)} · ${esc(m.categoria)}${m.foto ? ` · <a href="${esc(m.foto)}" target="_blank">🧾 foto</a>` : ''}</div>
-      ${m.estado === 'por confirmar' ? `<div class="resp"><button class="mini" onclick="confirmar('${m.id}','confirmado')">✅ Confirmar</button><button class="mini secundario" onclick="confirmar('${m.id}','descartado')">❌ Descartar</button></div>` : ''}</div>
+      <div class="resp"><button class="mini secundario" onclick="confirmar('${m.id}','descartado')">🗑️ Borrar</button></div></div>
       <b>${dinero(m.monto, m.moneda)}</b></div>`).join('') : '<div class="vacio">Sin movimientos.</div>') + '</div>';
   return html;
 }
@@ -530,7 +526,7 @@ async function confirmar(id, estado) {
   const r = await api('confirmar', { id, estado });
   if (r.error) return aviso(r.error, 'error');
   datos = await api('datos'); mostrar('finanzas');
-  aviso(estado === 'confirmado' ? '✅ Confirmado' : '❌ Descartado', 'exito');
+  aviso(estado === 'confirmado' ? '✅ Confirmado' : '🗑️ Borrado', 'exito');
 }
 
 function vistaOracion() {
