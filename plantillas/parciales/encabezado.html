@@ -1,0 +1,30 @@
+  <a class="saltar" href="#contenido">{{ nav.saltar }}</a>
+  <div class="aviso-borrador" role="note">{{ borrador }}</div>
+  <header class="encabezado">
+    <div class="encabezado__fila">
+      <a class="marca" href="./">
+        <img src="{{ @ruta }}img/logo-160.webp" width="160" height="82" alt="">
+        <span class="marca__texto">
+          <span class="marca__nombre">Río de Gracia</span>
+          <span class="marca__sub">River of Grace</span>
+        </span>
+      </a>
+      <a class="idioma" href="{{ @url_otro_idioma }}" hreflang="{{ @otro_idioma }}" lang="{{ @otro_idioma }}" data-idioma="{{ @otro_idioma }}" title="{{ nav.idioma_largo }}"><span class="idioma__largo">{{ nav.idioma }}</span><span class="idioma__corto" aria-hidden="true">{{ @otro_idioma }}</span></a>
+      <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu" data-abrir="{{ nav.menu }}" data-cerrar="{{ nav.cerrar }}">
+        <span class="menu-boton__icono" aria-hidden="true"></span>
+        <span class="menu-boton__texto">{{ nav.menu }}</span>
+      </button>
+    </div>
+    <nav id="menu" class="menu" aria-label="{{ nav.menu }}">
+      <ul>
+        <li><a href="./#nosotros">{{ nav.nosotros }}</a></li>
+        <li><a href="./#liderazgo">{{ nav.liderazgo }}</a></li>
+        <li><a href="./#comunidad">{{ nav.comunidad }}</a></li>
+        <li><a href="./#formacion">{{ nav.formacion }}</a></li>
+        <li><a href="./#visitanos">{{ nav.visitanos }}</a></li>
+        <li><a href="./#colabora">{{ nav.colabora }}</a></li>
+        <li><a href="asociacion.html">{{ nav.asociacion }}</a></li>
+        <li><a class="menu__destacado" href="./#contacto">{{ nav.contacto }}</a></li>
+      </ul>
+    </nav>
+  </header>

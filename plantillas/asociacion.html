@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="{{ @idioma }}">
+<head>
+  <title>{{ meta.titulo_asociacion }}</title>
+  <meta name="description" content="{{ meta.descripcion_asociacion }}">
+  <meta property="og:title" content="{{ meta.titulo_asociacion }}">
+  <meta property="og:description" content="{{ meta.descripcion_asociacion }}">
+<!-- incluir head-comun.html -->
+</head>
+<body>
+<!-- incluir encabezado.html -->
+  <main id="contenido">
+
+    <section class="cabecera-pagina">
+      <div class="contenedor contenedor--texto">
+        <p class="migas"><a href="./">{{ asociacion.migas }}</a> / {{ nav.asociacion }}</p>
+        <h1>{{ asociacion.titulo }}</h1>
+        <p class="portada__sub">{{ asociacion.intro }}</p>
+      </div>
+    </section>
+
+    <section class="seccion" aria-labelledby="t-mision">
+      <div class="contenedor rejilla rejilla--dos">
+        <article class="tarjeta tarjeta--destacada">
+          <h2 id="t-mision">{{ asociacion.mision_t }}</h2>
+          <p>{{ asociacion.mision_p }}</p>
+        </article>
+        <article class="tarjeta tarjeta--destacada tarjeta--rio">
+          <h2>{{ asociacion.vision_t }}</h2>
+          <p>{{ asociacion.vision_p }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="seccion seccion--suave" aria-labelledby="t-areas">
+      <div class="contenedor">
+        <h2 id="t-areas">{{ asociacion.areas_t }}</h2>
+        <div class="rejilla rejilla--dos">
+          <article class="tarjeta"><h3>{{ asociacion.evangelio_t }}</h3><p>{{ asociacion.evangelio_p }}</p></article>
+          <article class="tarjeta"><h3>{{ asociacion.amor_t }}</h3><p>{{ asociacion.amor_p }}</p></article>
+          <article class="tarjeta"><h3>{{ asociacion.formacion_t }}</h3><p>{{ asociacion.formacion_p }}</p></article>
+          <article class="tarjeta"><h3>{{ asociacion.servicio_t }}</h3><p>{{ asociacion.servicio_p }}</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion" aria-labelledby="t-valores">
+      <div class="contenedor">
+        <h2 id="t-valores">{{ asociacion.valores_t }}</h2>
+        <ol class="lista-numerada">
+          <li><h3>{{ asociacion.v1_t }}</h3><p>{{ asociacion.v1_p }}</p></li>
+          <li><h3>{{ asociacion.v2_t }}</h3><p>{{ asociacion.v2_p }}</p></li>
+          <li><h3>{{ asociacion.v3_t }}</h3><p>{{ asociacion.v3_p }}</p></li>
+          <li><h3>{{ asociacion.v4_t }}</h3><p>{{ asociacion.v4_p }}</p></li>
+          <li><h3>{{ asociacion.v5_t }}</h3><p>{{ asociacion.v5_p }}</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="seccion seccion--azul" aria-labelledby="t-objetivos">
+      <div class="contenedor">
+        <h2 id="t-objetivos">{{ asociacion.objetivos_t }}</h2>
+        <div class="rejilla rejilla--dos">
+          <article class="tarjeta"><h3>{{ asociacion.o1_t }}</h3><p>{{ asociacion.o1_p }}</p></article>
+          <article class="tarjeta"><h3>{{ asociacion.o2_t }}</h3><p>{{ asociacion.o2_p }}</p></article>
+          <article class="tarjeta"><h3>{{ asociacion.o3_t }}</h3><p>{{ asociacion.o3_p }}</p></article>
+          <article class="tarjeta"><h3>{{ asociacion.o4_t }}</h3><p>{{ asociacion.o4_p }}</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion" aria-labelledby="t-doc">
+      <div class="contenedor">
+        <h2 id="t-doc">{{ asociacion.doc_t }}</h2>
+        <p class="intro">{{ asociacion.doc_intro }}</p>
+        <div class="rejilla rejilla--dos">
+          <article class="tarjeta">
+            <h3>{{ asociacion.entidad_t }}</h3>
+            <p><strong>{{ asociacion.entidad_nombre }}</strong><br>{{ asociacion.entidad_pais }}</p>
+            <p>{{ asociacion.entidad_cedula }}</p>
+            <p>{{ asociacion.entidad_sede }}</p>
+          </article>
+          <article class="tarjeta">
+            <h3>{{ asociacion.junta_t }}</h3>
+            <dl class="junta">
+              <dt>{{ asociacion.presidente_c }}</dt><dd>{{ asociacion.presidente_n }}</dd>
+              <dt>{{ asociacion.vice_c }}</dt><dd>{{ asociacion.vice_n }}</dd>
+              <dt>{{ asociacion.secretaria_c }}</dt><dd>{{ asociacion.secretaria_n }}</dd>
+              <dt>{{ asociacion.tesorera_c }}</dt><dd>{{ asociacion.tesorera_n }}</dd>
+              <dt>{{ asociacion.fiscal_c }}</dt><dd>{{ asociacion.fiscal_n }}</dd>
+            </dl>
+            <p class="nota">{{ asociacion.junta_nota }}</p>
+          </article>
+          <article class="tarjeta">
+            <h3>{{ asociacion.proteccion_t }}</h3>
+            <p>{{ asociacion.proteccion_p }}</p>
+            <ul class="lista-check">
+              <li>{{ asociacion.proteccion_1 }}</li>
+              <li>{{ asociacion.proteccion_2 }}</li>
+              <li>{{ asociacion.proteccion_3 }}</li>
+              <li>{{ asociacion.proteccion_4 }}</li>
+            </ul>
+          </article>
+          <article class="tarjeta">
+            <h3>{{ asociacion.estatutos_t }}</h3>
+            <p>{{ asociacion.estatutos_p }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion seccion--suave" aria-labelledby="t-invitacion">
+      <div class="contenedor contenedor--texto centrado">
+        <h2 id="t-invitacion">{{ asociacion.invitacion_t }}</h2>
+        <p>{{ asociacion.invitacion_p }}</p>
+        <div class="botones botones--centro">
+          <a class="boton boton--calido" href="./#visitanos">{{ nav.visitanos }}</a>
+          <a class="boton" href="./">{{ asociacion.volver }}</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+<!-- incluir pie.html -->
+</body>
+</html>

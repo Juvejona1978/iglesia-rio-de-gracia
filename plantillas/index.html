@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="{{ @idioma }}">
+<head>
+  <title>{{ meta.titulo_inicio }}</title>
+  <meta name="description" content="{{ meta.descripcion_inicio }}">
+  <meta property="og:title" content="{{ meta.titulo_inicio }}">
+  <meta property="og:description" content="{{ meta.descripcion_inicio }}">
+<!-- incluir head-comun.html -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Church",
+    "name": "Iglesia Río de Gracia",
+    "alternateName": "River of Grace Church",
+    "url": "https://riodegraciacr.org/",
+    "logo": "https://riodegraciacr.org/img/icono-512.png",
+    "image": "https://riodegraciacr.org/img/compartir.jpg",
+    "email": "hatillomissionproject@gmail.com",
+    "telephone": "+506 7291 4585",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "100 m noreste de la Escuela Santa Marta",
+      "addressLocality": "Hatillo, Savegre, Quepos",
+      "addressRegion": "Puntarenas",
+      "postalCode": "60602",
+      "addressCountry": "CR"
+    },
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=74W2%2BF52%20Hatillo%2C%20Puntarenas",
+    "sameAs": ["https://www.facebook.com/IglesiaRG"],
+    "knowsLanguage": ["es", "en"],
+    "event": {
+      "@type": "Event",
+      "name": "Culto bilingüe · Bilingual service",
+      "eventSchedule": { "@type": "Schedule", "byDay": "https://schema.org/Saturday", "startTime": "15:00", "repeatFrequency": "P1W", "scheduleTimezone": "America/Costa_Rica" },
+      "location": { "@type": "Place", "name": "Iglesia Río de Gracia", "address": "Hatillo, Savegre, Quepos, Puntarenas, Costa Rica" }
+    }
+  }
+  </script>
+</head>
+<body>
+<!-- incluir encabezado.html -->
+  <main id="contenido">
+
+    <section class="portada">
+      <!-- Foto del templo con parallax suave y el río del logo abajo (movimiento en estilos.css). -->
+      <div class="portada__capas" aria-hidden="true">
+        <img class="portada__foto" src="{{ @ruta }}img/portada-templo-1600.webp" srcset="{{ @ruta }}img/portada-templo-800.webp 800w, {{ @ruta }}img/portada-templo-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="" fetchpriority="high">
+        <svg class="capa capa--rio" viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+          <path d="M0 70 C240 32 430 98 720 66 S1200 28 1440 64 L1440 120 L0 120 Z" fill="#36a3d6" opacity=".9"/>
+          <path d="M0 86 C260 62 520 106 800 82 S1230 64 1440 84 L1440 120 L0 120 Z" fill="#2070a0" opacity=".75"/>
+          <path d="M0 100 C300 84 560 116 820 100 S1240 90 1440 102 L1440 120 L0 120 Z" fill="#fffdf9"/>
+        </svg>
+      </div>
+      <div class="contenedor portada__contenido">
+        <div class="portada__texto">
+          <p class="portada__saludo">{{ inicio.saludo }}</p>
+          <h1>{{ inicio.titulo }}</h1>
+          <p class="portada__sub">{{ inicio.subtitulo }}</p>
+        </div>
+        <aside class="reunion" aria-labelledby="t-horarios">
+          <h2 id="t-horarios">{{ horarios.titulo }}</h2>
+          <ul>
+            <li>
+              <span class="reunion__nombre">{{ horarios.culto_nombre }}</span>
+              <span class="reunion__cuando">{{ horarios.culto_cuando }}</span>
+            </li>
+            <li>
+              <span class="reunion__nombre">{{ horarios.semana_nombre }}</span>
+              <span class="reunion__cuando reunion__cuando--suave">{{ horarios.semana_cuando }}</span>
+            </li>
+          </ul>
+          <p class="reunion__lugar">{{ horarios.lugar }}</p>
+          <div class="botones">
+            <a class="boton boton--calido" href="https://www.google.com/maps/search/?api=1&amp;query=74W2%2BF52%20Hatillo%2C%20Puntarenas" rel="noopener">{{ horarios.como_llegar }}</a>
+            <a class="boton" href="https://wa.me/50672914585" rel="noopener">WhatsApp</a>
+          </div>
+          <p class="reunion__nota">{{ horarios.nota }}</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="lema contenedor revelar" aria-label="{{ inicio.lema_ref }}">
+      <blockquote>
+        <p>{{ inicio.lema_texto }}</p>
+        <footer>{{ inicio.lema_ref }}</footer>
+      </blockquote>
+    </section>
+
+    <section id="nosotros" class="seccion" aria-labelledby="t-nosotros">
+      <div class="contenedor contenedor--texto">
+        <h2 id="t-nosotros">{{ nosotros.titulo }}</h2>
+        <p>{{ nosotros.p1 }}</p>
+        <p>{{ nosotros.p2 }}</p>
+        <p>{{ nosotros.historia }}</p>
+      </div>
+    </section>
+
+    <section id="creencias" class="seccion seccion--suave" aria-labelledby="t-creencias">
+      <div class="contenedor">
+        <h2 id="t-creencias">{{ creencias.titulo }}</h2>
+        <p class="intro">{{ creencias.intro }}</p>
+        <div class="rejilla rejilla--creencias">
+          <article class="tarjeta tarjeta--destacada">
+            <h3>{{ creencias.gracia_t }}</h3>
+            <p>{{ creencias.gracia_p }}</p>
+          </article>
+          <article class="tarjeta"><h3>{{ creencias.dios_t }}</h3><p>{{ creencias.dios_p }}</p></article>
+          <article class="tarjeta"><h3>{{ creencias.espiritu_t }}</h3><p>{{ creencias.espiritu_p }}</p></article>
+          <article class="tarjeta"><h3>{{ creencias.humildad_t }}</h3><p>{{ creencias.humildad_p }}</p></article>
+          <article class="tarjeta"><h3>{{ creencias.libertad_t }}</h3><p>{{ creencias.libertad_p }}</p></article>
+        </div>
+        <p class="mas"><a href="asociacion.html">{{ creencias.mas }} →</a></p>
+      </div>
+    </section>
+
+    <section id="liderazgo" class="seccion" aria-labelledby="t-liderazgo">
+      <div class="contenedor">
+        <h2 id="t-liderazgo">{{ liderazgo.titulo }}</h2>
+        <p class="intro">{{ liderazgo.intro }}</p>
+        <div class="rejilla rejilla--lideres">
+          <article class="lider">
+            <img src="{{ @ruta }}img/{{ liderazgo.f1_img }}" width="800" height="800" loading="lazy" alt="{{ liderazgo.f1_alt }}">
+            <div class="lider__texto">
+              <p class="lider__rol">{{ liderazgo.f1_rol }}</p>
+              <h3>{{ liderazgo.f1_nombres }}</h3>
+              <p>{{ liderazgo.f1_bio }}</p>
+            </div>
+          </article>
+          <article class="lider">
+            <img src="{{ @ruta }}img/{{ liderazgo.f2_img }}" width="800" height="800" loading="lazy" alt="{{ liderazgo.f2_alt }}">
+            <div class="lider__texto">
+              <p class="lider__rol">{{ liderazgo.f2_rol }}</p>
+              <h3>{{ liderazgo.f2_nombres }}</h3>
+              <p>{{ liderazgo.f2_bio }}</p>
+            </div>
+          </article>
+          <article class="lider">
+            <img src="{{ @ruta }}img/{{ liderazgo.f3_img }}" width="800" height="800" loading="lazy" alt="{{ liderazgo.f3_alt }}">
+            <div class="lider__texto">
+              <p class="lider__rol">{{ liderazgo.f3_rol }}</p>
+              <h3>{{ liderazgo.f3_nombres }}</h3>
+              <p>{{ liderazgo.f3_bio }}</p>
+            </div>
+          </article>
+          <article class="lider">
+            <img src="{{ @ruta }}img/{{ liderazgo.f4_img }}" width="800" height="800" loading="lazy" alt="{{ liderazgo.f4_alt }}">
+            <div class="lider__texto">
+              <p class="lider__rol">{{ liderazgo.f4_rol }}</p>
+              <h3>{{ liderazgo.f4_nombres }}</h3>
+              <p>{{ liderazgo.f4_bio }}</p>
+            </div>
+          </article>
+          <article class="lider">
+            <img src="{{ @ruta }}img/{{ liderazgo.f5_img }}" width="800" height="800" loading="lazy" alt="{{ liderazgo.f5_alt }}">
+            <div class="lider__texto">
+              <p class="lider__rol">{{ liderazgo.f5_rol }}</p>
+              <h3>{{ liderazgo.f5_nombres }}</h3>
+              <p>{{ liderazgo.f5_bio }}</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="comunidad" class="seccion seccion--azul" aria-labelledby="t-comunidad">
+      <div class="contenedor">
+        <h2 id="t-comunidad">{{ comunidad.titulo }}</h2>
+        <p class="intro">{{ comunidad.intro }}</p>
+        <div class="rejilla rejilla--dos">
+          <article class="tarjeta"><h3>{{ comunidad.ayuda_t }}</h3><p>{{ comunidad.ayuda_p }}</p></article>
+          <article class="tarjeta"><h3>{{ comunidad.festival_t }}</h3><p>{{ comunidad.festival_p }}</p></article>
+          <article class="tarjeta"><h3>{{ comunidad.dsl_t }}</h3><p>{{ comunidad.dsl_p }}</p></article>
+          <article class="tarjeta"><h3>{{ comunidad.misiones_t }}</h3><p>{{ comunidad.misiones_p }}</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="formacion" class="seccion" aria-labelledby="t-formacion">
+      <div class="contenedor">
+        <h2 id="t-formacion">{{ formacion.titulo }}</h2>
+        <div class="rejilla rejilla--dos">
+          <article class="tarjeta"><h3>{{ formacion.glomos_t }}</h3><p>{{ formacion.glomos_p }}</p></article>
+          <article class="tarjeta"><h3>{{ formacion.estudios_t }}</h3><p>{{ formacion.estudios_p }}</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="visitanos" class="seccion seccion--suave" aria-labelledby="t-visita">
+      <div class="contenedor rejilla rejilla--visita">
+        <div>
+          <h2 id="t-visita">{{ visita.titulo }}</h2>
+          <img class="foto-redonda" src="{{ @ruta }}img/templo-cerca.webp" width="1000" height="463" loading="lazy" alt="{{ visita.foto_alt }}">
+          <h3>{{ visita.direccion_t }}</h3>
+          <p>{{ visita.direccion }}</p>
+          <p class="nota">{{ visita.plus }}</p>
+          <p><a class="boton" href="https://www.google.com/maps/search/?api=1&amp;query=74W2%2BF52%20Hatillo%2C%20Puntarenas" rel="noopener">{{ visita.mapa_boton }}</a></p>
+          <h3>{{ visita.esperar_t }}</h3>
+          <ul class="lista-check">
+            <li>{{ visita.esperar_1 }}</li>
+            <li>{{ visita.esperar_2 }}</li>
+            <li>{{ visita.esperar_3 }}</li>
+            <li>{{ visita.esperar_4 }}</li>
+          </ul>
+        </div>
+        <div class="mapa">
+          <iframe title="{{ visita.mapa_titulo }}" src="https://www.google.com/maps?q=74W2%2BF52%20Hatillo%2C%20Puntarenas&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="colabora" class="seccion" aria-labelledby="t-colabora">
+      <div class="contenedor">
+        <h2 id="t-colabora">{{ colabora.titulo }}</h2>
+        <p class="intro">{{ colabora.intro }}</p>
+        <div class="rejilla rejilla--tres">
+          <article class="tarjeta"><h3>{{ colabora.orar_t }}</h3><p>{{ colabora.orar_p }}</p></article>
+          <article class="tarjeta"><h3>{{ colabora.servir_t }}</h3><p>{{ colabora.servir_p }}</p></article>
+          <article class="tarjeta"><h3>{{ colabora.dar_t }}</h3><p>{{ colabora.dar_p }}</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="seccion seccion--azul" aria-labelledby="t-contacto">
+      <div class="contenedor">
+        <h2 id="t-contacto">{{ contacto.titulo }}</h2>
+        <p class="intro">{{ contacto.intro }}</p>
+        <div class="rejilla rejilla--tres contacto">
+          <a class="tarjeta contacto__item" href="mailto:hatillomissionproject@gmail.com">
+            <span class="contacto__tipo">{{ contacto.correo_t }}</span>
+            <span>hatillomissionproject@gmail.com</span>
+          </a>
+          <a class="tarjeta contacto__item" href="https://wa.me/50672914585" rel="noopener">
+            <span class="contacto__tipo">{{ contacto.whatsapp_t }}</span>
+            <span><span class="pendiente">+506 7291 4585</span></span>
+          </a>
+          <a class="tarjeta contacto__item" href="https://www.facebook.com/IglesiaRG" rel="noopener">
+            <span class="contacto__tipo">{{ contacto.facebook_t }}</span>
+            <span>facebook.com/IglesiaRG</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+<!-- incluir pie.html -->
+</body>
+</html>
