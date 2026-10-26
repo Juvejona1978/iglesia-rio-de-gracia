@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel · Río de Gracia</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    /* Panel de Iglesia Río de Gracia (Telegram Mini App). Colores del logo; respeta el tema claro/oscuro de Telegram. */
+    :root {
+      --fondo: var(--tg-theme-bg-color, #fffdf9);
+      --fondo2: var(--tg-theme-secondary-bg-color, #f6efe4);
+      --texto: var(--tg-theme-text-color, #1d2733);
+      --suave: var(--tg-theme-hint-color, #6b7785);
+      --boton: var(--tg-theme-button-color, #1f4a82);
+      --boton-texto: var(--tg-theme-button-text-color, #ffffff);
+      --acento: #c8693d;
+      --rio: #36a3d6;
+      --ok: #2e8b57;
+      --radio: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--fondo2); color: var(--texto); font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding-bottom: 76px; }
+    header { background: linear-gradient(135deg, #1f4a82, #2070a0); color: #fff; padding: 18px 16px 22px; }
+    header h1 { margin: 0; font-size: 1.25rem; }
+    header p { margin: 4px 0 0; opacity: .85; font-size: .95rem; }
+    main { padding: 12px; max-width: 720px; margin: 0 auto; }
+    .tarjeta { background: var(--fondo); border-radius: var(--radio); padding: 14px; margin-bottom: 12px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+    .tarjeta h2 { margin: 0 0 10px; font-size: 1.05rem; }
+    .tarjeta h3 { margin: 0 0 4px; font-size: 1rem; }
+    .meta { color: var(--suave); font-size: .9rem; }
+    .fila { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid rgba(127,127,127,.15); }
+    .fila:last-child { border-bottom: 0; }
+    .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+    .numero { background: var(--fondo2); border-radius: 12px; padding: 10px; }
+    .numero b { display: block; font-size: 1.15rem; }
+    .chip { display: inline-block; background: var(--fondo2); border-radius: 999px; padding: 2px 10px; font-size: .85rem; margin: 2px 4px 2px 0; }
+    .resp { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    details summary { cursor: pointer; color: var(--boton); font-weight: 600; margin-top: 6px; }
+    button, .btn { appearance: none; border: 0; border-radius: 12px; background: var(--boton); color: var(--boton-texto); font: 600 1rem system-ui, sans-serif; padding: 12px 16px; width: 100%; margin-top: 10px; cursor: pointer; }
+    button.secundario { background: var(--fondo2); color: var(--texto); }
+    button.mini { width: auto; padding: 6px 12px; font-size: .9rem; margin: 0; }
+    button:disabled { opacity: .5; }
+    label { display: block; font-weight: 600; margin: 12px 0 6px; }
+    textarea, input[type=text] { width: 100%; border: 1px solid rgba(127,127,127,.35); border-radius: 12px; padding: 10px; font: inherit; background: var(--fondo); color: var(--texto); }
+    textarea { min-height: 110px; }
+    .opciones label { display: flex; align-items: center; gap: 10px; font-weight: 400; margin: 6px 0; padding: 10px; background: var(--fondo2); border-radius: 12px; }
+    .opciones input { width: 20px; height: 20px; }
+    .segmentos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .segmentos button { margin: 0; background: var(--fondo2); color: var(--texto); padding: 10px 6px; font-size: .9rem; }
+    .segmentos button.activo { background: var(--boton); color: var(--boton-texto); }
+    nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--fondo); display: flex; justify-content: space-around; border-top: 1px solid rgba(127,127,127,.2); padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); z-index: 5; }
+    nav button { background: none; color: var(--suave); width: auto; flex: 1; margin: 0; padding: 4px 2px; font: 600 .72rem system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    nav button span { font-size: 1.35rem; }
+    nav button.activo { color: var(--boton); }
+    .vacio { color: var(--suave); text-align: center; padding: 18px 8px; }
+    .aviso { background: #fff4c2; color: #5a4500; border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; }
+    .exito { background: #e3f4e8; color: #1f5f39; }
+    .error { background: #fde4e1; color: #7a2117; }
+    .oculto { display: none !important; }
+    .respondida { opacity: .7; }
+    .foto-previa { max-width: 100%; border-radius: 12px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⛰️ Río de Gracia</h1>
+    <p id="saludo">Cargando…</p>
+  </header>
+  <main id="contenido">
+    <div class="tarjeta vacio" id="cargando">Cargando tu información…</div>
+  </main>
+  <nav id="navegacion" class="oculto"></nav>
+
+<script>
+/* Panel de Iglesia Río de Gracia: lee y publica a través de la API del bot (Apps Script). */
+const API = 'https://script.google.com/macros/s/AKfycbwrJBTBQfE4JrdAIuF-em7EEQyx8FGYUAYGvb8SYW0yzEoXNhPimx9lFWwl8GeGbZr71Q/exec?api=1';
+const tg = window.Telegram && window.Telegram.WebApp;
+let datos = null;
+let seccion = 'inicio';
+
+const $ = (sel) => document.querySelector(sel);
+const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const dinero = (n, moneda) => (moneda === 'USD' ? '$' : '₡') + Number(n || 0).toLocaleString('es-CR', { maximumFractionDigits: 2 });
+
+async function api(accion, extra) {
+  const r = await fetch(API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // sin "preflight": Apps Script no lo atiende
+    body: JSON.stringify(Object.assign({ accion, initData: tg ? tg.initData : '' }, extra || {}))
+  });
+  return r.json();
+}
+
+function aviso(texto, tipo) {
+  const div = document.createElement('div');
+  div.className = 'aviso ' + (tipo || '');
+  div.textContent = texto;
+  $('#contenido').prepend(div);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => div.remove(), 7000);
+}
+
+async function cargar() {
+  if (!tg || !tg.initData) {
+    $('#saludo').textContent = 'Abre este panel desde el bot de Telegram.';
+    $('#contenido').innerHTML = '<div class="tarjeta vacio">Para usar el panel, abre <b>@AsistenteJuntaRDGbot</b> en Telegram y toca <b>📊 Abrir el panel</b>.</div>';
+    return;
+  }
+  tg.ready();
+  tg.expand();
+  try {
+    datos = await api('datos');
+  } catch (e) {
+    datos = { error: 'No pude conectarme. Revisa tu internet e intenta de nuevo.' };
+  }
+  if (datos.error) {
+    $('#saludo').textContent = '';
+    $('#contenido').innerHTML = '<div class="tarjeta vacio">' + esc(datos.error) + '</div>';
+    return;
+  }
+  $('#saludo').textContent = 'Hola, ' + datos.usuario.nombre.split(' ')[0] + ' 👋';
+  armarNavegacion();
+  mostrar(seccion);
+}
+
+function armarNavegacion() {
+  const items = [['inicio', '🏠', 'Inicio'], ['actividades', '📅', 'Actividades'], ['publicar', '✍️', 'Publicar']];
+  if (datos.finanzas) items.push(['finanzas', '💰', 'Finanzas']);
+  items.push(['oracion', '🙏', 'Oración'], ['mas', '☰', 'Más']);
+  $('#navegacion').innerHTML = items.map(([id, icono, nombre]) =>
+    `<button data-ir="${id}" class="${id === seccion ? 'activo' : ''}"><span>${icono}</span>${nombre}</button>`).join('');
+  $('#navegacion').classList.remove('oculto');
+  $('#navegacion').onclick = (e) => {
+    const b = e.target.closest('button');
+    if (b) mostrar(b.dataset.ir);
+  };
+}
+
+function mostrar(id) {
+  seccion = id;
+  document.querySelectorAll('#navegacion button').forEach((b) => b.classList.toggle('activo', b.dataset.ir === id));
+  const vistas = { inicio: vistaInicio, actividades: vistaActividades, publicar: vistaPublicar, finanzas: vistaFinanzas, oracion: vistaOracion, mas: vistaMas };
+  $('#contenido').innerHTML = (vistas[id] || vistaInicio)();
+  if (id === 'publicar') prepararPublicar();
+  window.scrollTo(0, 0);
+}
+
+/* ---------- Vistas ---------- */
+
+function tarjetaActividad(a, completa) {
+  const nombres = (l) => l.length ? l.map(esc).join(', ') : '—';
+  return `<div class="tarjeta">
+    <h3>📅 ${esc(a.titulo)}</h3>
+    <div class="meta">${esc(a.fechaLarga)}${a.hora ? ' · ' + esc(a.hora) : ''}${a.lugar ? ' · 📍 ' + esc(a.lugar) : ''}</div>
+    <div class="meta">${esc(a.ministerio)}${a.responsable ? ' · 👤 ' + esc(a.responsable) : ''}</div>
+    <div class="resp"><span class="chip">✅ ${a.si.length} van</span><span class="chip">❌ ${a.no.length} no</span><span class="chip">🤔 ${a.talvez.length} tal vez</span></div>
+    ${completa ? `<details><summary>¿Quién respondió?</summary>
+      <p>✅ ${nombres(a.si)}</p><p>❌ ${nombres(a.no)}</p><p>🤔 ${nombres(a.talvez)}</p></details>` : ''}
+  </div>`;
+}
+
+function vistaInicio() {
+  let html = '';
+  const prox = datos.actividades.slice(0, 3);
+  html += `<div class="tarjeta"><h2>📅 Próximas actividades</h2>${prox.length ? prox.map((a) =>
+    `<div class="fila"><div><b>${esc(a.titulo)}</b><div class="meta">${esc(a.fechaLarga)} · ${esc(a.ministerio)}</div></div><span class="chip">✅ ${a.si.length}</span></div>`).join('')
+    : '<div class="vacio">No hay actividades próximas.</div>'}</div>`;
+  if (datos.finanzas) {
+    const f = datos.finanzas;
+    html += `<div class="tarjeta"><h2>💰 Finanzas de ${esc(f.mes)}</h2><div class="numeros">${Object.keys(f.saldos).map((m) =>
+      `<div class="numero">💵 Caja<b>${dinero(f.saldos[m].caja, m)}</b></div><div class="numero">🏦 Banco<b>${dinero(f.saldos[m].banco, m)}</b></div>` +
+      `<div class="numero">🤝 Ayuda social<b>${dinero(f.fondo[m] || 0, m)}</b></div>`).join('') || '<div class="vacio">Sin movimientos.</div>'}</div></div>`;
+  }
+  const pend = datos.pendientes.slice(0, 5);
+  html += `<div class="tarjeta"><h2>📌 Pendientes (${datos.pendientes.length})</h2>${pend.length ? pend.map((p) =>
+    `<div class="fila"><div>${esc(p.descripcion)}<div class="meta">${p.fecha ? '📅 ' + esc(p.fecha) : 'sin fecha'}${p.responsable ? ' · 👤 ' + esc(p.responsable) : ''}</div></div></div>`).join('')
+    : '<div class="vacio">🎉 Nada pendiente.</div>'}</div>`;
+  const activas = datos.oracion.filter((o) => o.estado === 'activa');
+  html += `<div class="tarjeta"><h2>🙏 Oración</h2><div class="meta">${activas.length} petición(es) activa(s)</div></div>`;
+  return html;
+}
+
+function vistaActividades() {
+  let html = datos.actividades.length ? datos.actividades.map((a) => tarjetaActividad(a, true)).join('')
+    : '<div class="tarjeta vacio">No hay actividades próximas. Publica una en ✍️ Publicar.</div>';
+  if (datos.visitas && datos.visitas.length) {
+    html += '<div class="tarjeta"><h2>✈️ Visitas de misioneros</h2>' + datos.visitas.map((v) =>
+      `<div class="fila"><div><b>${esc(v.equipo || 'Equipo misionero')}</b>${v.iglesia ? ' · ' + esc(v.iglesia) : ''}
+      <div class="meta">🛬 ${esc(v.llegada)}${v.salida ? ' · 🛫 ' + esc(v.salida) : ''}${v.personas ? ' · 👥 ' + esc(v.personas) : ''}</div>
+      ${v.actividades ? `<div class="meta">📋 ${esc(v.actividades)}</div>` : ''}</div></div>`).join('') + '</div>';
+  }
+  return html;
+}
+
+function vistaPublicar() {
+  const grupos = datos.grupos.map((g) => `<label><input type="checkbox" name="grupo" value="${g.ministerio}"> ${esc(g.nombre)}</label>`).join('');
+  return `<div class="tarjeta">
+    <h2>✍️ ¿Qué quieres publicar?</h2>
+    <div class="segmentos" id="tipos">
+      <button data-tipo="actividad" class="activo">📅 Actividad</button>
+      <button data-tipo="anuncio">📢 Anuncio</button>
+      <button data-tipo="encuesta">📋 Encuesta</button>
+    </div>
+    ${datos.finanzas ? '<button class="secundario" data-tipo="factura" id="btn-factura">🧾 Subir una factura</button>' : ''}
+    ${datos.usuario.verTodo ? '<button class="secundario" data-tipo="visita" id="btn-visita">✈️ Anotar visita de misioneros</button>' : ''}
+
+    <div id="f-grupos"><label>¿A qué grupo(s)?</label><div class="opciones">${grupos || '<div class="vacio">No hay grupos activados.</div>'}</div></div>
+
+    <div id="f-texto">
+      <label id="etiqueta-texto">¿Qué actividad es, qué día, a qué hora y dónde?</label>
+      <textarea id="texto" placeholder="Escríbelo con tus palabras"></textarea>
+    </div>
+
+    <div id="f-encuesta" class="oculto">
+      <label>Pregunta</label><input type="text" id="pregunta" placeholder="Por ejemplo: ¿Qué día les queda mejor?">
+      <label>Opciones (una por línea)</label><textarea id="opciones" placeholder="Sábado&#10;Domingo"></textarea>
+      <label class="opciones"><input type="checkbox" id="multiple"> Se puede elegir más de una</label>
+    </div>
+
+    <div id="f-factura" class="oculto">
+      <label>Foto de la factura o recibo</label>
+      <input type="file" id="foto" accept="image/*" capture="environment">
+      <img id="previa" class="foto-previa oculto" alt="Vista previa de la factura">
+      <label>Nota (opcional)</label><input type="text" id="nota" placeholder="Por ejemplo: compra para el festival">
+    </div>
+
+    <label class="opciones" id="f-fijar"><input type="checkbox" id="fijar"> 📌 Fijarlo arriba en el grupo</label>
+    <button id="enviar">Publicar</button>
+  </div>
+  <div class="meta" style="padding:0 6px">Las actividades se fijan solas, con botones de respuesta y recordatorios.</div>`;
+}
+
+let tipoPublicar = 'actividad';
+function prepararPublicar() {
+  const cambiar = (tipo) => {
+    tipoPublicar = tipo;
+    document.querySelectorAll('#tipos button').forEach((b) => b.classList.toggle('activo', b.dataset.tipo === tipo));
+    $('#f-grupos').classList.toggle('oculto', tipo === 'factura' || tipo === 'visita');
+    $('#f-texto').classList.toggle('oculto', tipo === 'encuesta' || tipo === 'factura');
+    $('#f-encuesta').classList.toggle('oculto', tipo !== 'encuesta');
+    $('#f-factura').classList.toggle('oculto', tipo !== 'factura');
+    $('#f-fijar').classList.toggle('oculto', tipo === 'actividad' || tipo === 'factura' || tipo === 'visita');
+    $('#etiqueta-texto').textContent = tipo === 'actividad' ? '¿Qué actividad es, qué día, a qué hora y dónde?'
+      : tipo === 'visita' ? '¿Qué equipo viene, de qué iglesia, cuándo llegan y se van, cuántos son y qué harán?'
+      : 'Escribe el anuncio tal como quieres que se publique';
+    $('#enviar').textContent = tipo === 'factura' ? 'Subir factura' : tipo === 'visita' ? 'Anotar visita' : 'Publicar';
+  };
+  document.querySelectorAll('[data-tipo]').forEach((b) => b.onclick = () => cambiar(b.dataset.tipo));
+  $('#foto') && ($('#foto').onchange = () => {
+    const f = $('#foto').files[0];
+    if (f) { $('#previa').src = URL.createObjectURL(f); $('#previa').classList.remove('oculto'); }
+  });
+  $('#enviar').onclick = enviarPublicacion;
+}
+
+/** Reduce la foto antes de subirla (conexiones lentas): máximo 1600 px, JPEG. */
+function fotoComoBase64(archivo) {
+  return new Promise((resolver, rechazar) => {
+    const img = new Image();
+    img.onload = () => {
+      const escala = Math.min(1, 1600 / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * escala); c.height = Math.round(img.height * escala);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      resolver(c.toDataURL('image/jpeg', 0.82).split(',')[1]);
+    };
+    img.onerror = rechazar;
+    img.src = URL.createObjectURL(archivo);
+  });
+}
+
+async function enviarPublicacion() {
+  const boton = $('#enviar');
+  const grupos = [...document.querySelectorAll('input[name=grupo]:checked')].map((i) => i.value);
+  let pedido;
+  if (tipoPublicar === 'factura') {
+    const f = $('#foto').files[0];
+    if (!f) return aviso('Toma o elige la foto de la factura.', 'error');
+    pedido = ['factura', { imagen: await fotoComoBase64(f), tipo: 'image/jpeg', nota: $('#nota').value }];
+  } else if (tipoPublicar === 'visita') {
+    if (!$('#texto').value.trim()) return aviso('Escribe los datos de la visita.', 'error');
+    pedido = ['visita', { texto: $('#texto').value }];
+  } else if (tipoPublicar === 'encuesta') {
+    pedido = ['encuesta', { grupos, pregunta: $('#pregunta').value, opciones: $('#opciones').value.split('\n'), multiple: $('#multiple').checked, fijar: $('#fijar').checked }];
+  } else {
+    if (!grupos.length) return aviso('Elige al menos un grupo.', 'error');
+    if (!$('#texto').value.trim()) return aviso('Escribe el mensaje.', 'error');
+    pedido = ['publicar', { grupos, texto: $('#texto').value, tipo: tipoPublicar, fijar: $('#fijar').checked }];
+  }
+  boton.disabled = true; boton.textContent = 'Enviando…';
+  try {
+    const r = await api(pedido[0], pedido[1]);
+    if (r.error) { aviso(r.error, 'error'); }
+    else {
+      tg && tg.HapticFeedback && tg.HapticFeedback.notificationOccurred('success');
+      datos = await api('datos');
+      mostrar('publicar');
+      aviso(r.mensaje || 'Listo.', 'exito');
+    }
+  } catch (e) {
+    aviso('No pude enviarlo. Revisa tu internet e intenta de nuevo.', 'error');
+  }
+  boton.disabled = false;
+}
+
+function vistaFinanzas() {
+  const f = datos.finanzas;
+  if (!f) return '';
+  let html = `<div class="tarjeta"><h2>💰 ${esc(f.mes)}</h2><div class="numeros">`;
+  Object.keys(f.totales).forEach((m) => {
+    const t = f.totales[m];
+    html += `<div class="numero">➕ Ingresos<b>${dinero(t.entrada, m)}</b></div><div class="numero">➖ Gastos<b>${dinero(t.salida, m)}</b></div>` +
+      `<div class="numero">= Balance<b>${dinero(t.entrada - t.salida, m)}</b></div>`;
+  });
+  html += '</div></div><div class="tarjeta"><h2>Saldos a hoy</h2><div class="numeros">';
+  Object.keys(f.saldos).forEach((m) => {
+    html += `<div class="numero">💵 Caja<b>${dinero(f.saldos[m].caja, m)}</b></div><div class="numero">🏦 Banco<b>${dinero(f.saldos[m].banco, m)}</b></div>` +
+      `<div class="numero">🤝 Fondo ayuda social (20 %)<b>${dinero(f.fondo[m] || 0, m)}</b></div>`;
+  });
+  html += '</div></div>';
+  const cats = Object.keys(f.categorias).sort((a, b) => f.categorias[b] - f.categorias[a]);
+  if (cats.length) html += '<div class="tarjeta"><h2>Gastos por categoría</h2>' + cats.map((c) =>
+    `<div class="fila"><span>${esc(c)}</span><b>${dinero(f.categorias[c], 'CRC')}</b></div>`).join('') + '</div>';
+  const iconos = { entrada: '➕', salida: '➖', deposito: '🏦⬆', retiro: '🏦⬇' };
+  html += '<div class="tarjeta"><h2>Últimos movimientos</h2>' + (f.movimientos.length ? f.movimientos.map((m) =>
+    `<div class="fila"><div>${iconos[m.tipo] || '·'} ${esc(m.concepto || m.categoria)}<div class="meta">${esc(m.fecha)} · ${esc(m.categoria)}${m.foto ? ` · <a href="${esc(m.foto)}" target="_blank">🧾 foto</a>` : ''}</div>
+      ${m.estado === 'por confirmar' ? `<div class="resp"><button class="mini" onclick="confirmar('${m.id}','confirmado')">✅ Confirmar</button><button class="mini secundario" onclick="confirmar('${m.id}','descartado')">❌ Descartar</button></div>` : ''}</div>
+      <b>${dinero(m.monto, m.moneda)}</b></div>`).join('') : '<div class="vacio">Sin movimientos.</div>') + '</div>';
+  return html;
+}
+
+async function confirmar(id, estado) {
+  const r = await api('confirmar', { id, estado });
+  if (r.error) return aviso(r.error, 'error');
+  datos = await api('datos'); mostrar('finanzas');
+  aviso(estado === 'confirmado' ? '✅ Confirmado' : '❌ Descartado', 'exito');
+}
+
+function vistaOracion() {
+  if (!datos.oracion.length) return '<div class="tarjeta vacio">No hay peticiones de oración registradas.<br>Se agregan solas cuando alguien pide oración en el grupo general.</div>';
+  return datos.oracion.map((o) => `<div class="tarjeta ${o.estado === 'respondida' ? 'respondida' : ''}">
+    <h3>${o.estado === 'respondida' ? '🙌' : '🙏'} ${esc(o.nombre)}</h3>
+    <div class="meta">${esc(o.fecha)}</div>
+    <p>${esc(o.texto)}</p>
+    ${o.nota && o.estado === 'respondida' ? `<p class="meta">🙌 ${esc(o.nota)}</p>` : ''}
+    <button class="mini ${o.estado === 'respondida' ? 'secundario' : ''}" onclick="oracion('${o.id}','${o.estado === 'respondida' ? 'activa' : 'respondida'}')">
+      ${o.estado === 'respondida' ? 'Volver a activa' : '🙌 Marcar como respondida'}</button>
+  </div>`).join('');
+}
+
+async function oracion(id, estado) {
+  const r = await api('oracion', { id, estado });
+  if (r.error) return aviso(r.error, 'error');
+  datos = await api('datos'); mostrar('oracion');
+}
+
+function vistaMas() {
+  let html = '<div class="tarjeta"><h2>📌 Pendientes</h2>' + (datos.pendientes.length ? datos.pendientes.map((p) =>
+    `<div class="fila"><div>${esc(p.descripcion)}<div class="meta">${p.fecha ? '📅 ' + esc(p.fecha) : 'sin fecha'}${p.responsable ? ' · 👤 ' + esc(p.responsable) : ''} · ${esc(p.ministerio)}</div></div>
+    <button class="mini" onclick="hecho('${p.id}')">✔️</button></div>`).join('') : '<div class="vacio">🎉 Nada pendiente.</div>') + '</div>';
+  if (datos.encuestas.length) {
+    html += '<div class="tarjeta"><h2>📋 Encuestas</h2>' + datos.encuestas.map((e) =>
+      `<div class="fila"><div><b>${esc(e.pregunta)}</b> <span class="meta">· ${esc(e.ministerio)}</span>${e.opciones.map((o) =>
+        `<div class="meta">${esc(o.texto)}: <b>${o.votos.length}</b>${o.votos.length ? ' — ' + o.votos.map(esc).join(', ') : ''}</div>`).join('')}</div></div>`).join('') + '</div>';
+  }
+  if (datos.participacion) {
+    html += '<div class="tarjeta"><h2>📊 Participación · 30 días</h2>' + datos.participacion.map((g) =>
+      `<div class="fila"><div><b>${esc(g.grupo)}</b><div class="meta">${g.top.map((t) => esc(t.nombre) + ' (' + t.mensajes + ')').join(', ') || '—'}</div></div>
+      <span class="chip">${g.mensajes} msj · ${g.activos} 👤</span></div>`).join('') + '</div>';
+  }
+  html += '<button class="secundario" onclick="recargar()">🔄 Actualizar</button>';
+  return html;
+}
+
+async function hecho(id) {
+  const r = await api('hecho', { id });
+  if (r.error) return aviso(r.error, 'error');
+  datos = await api('datos'); mostrar('mas');
+  aviso('✔️ Pendiente cerrado', 'exito');
+}
+
+async function recargar() {
+  datos = await api('datos'); mostrar(seccion);
+}
+
+cargar();
+</script>
+</body>
+</html>
