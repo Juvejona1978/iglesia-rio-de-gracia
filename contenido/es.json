@@ -141,7 +141,8 @@
     "intro": "¿Tienes una pregunta, necesitas oración o quieres visitarnos? Nos encantará saber de ti.",
     "correo_t": "Correo",
     "whatsapp_t": "WhatsApp",
-    "facebook_t": "Facebook"
+    "facebook_t": "Facebook",
+    "telegram_t": "Telegram"
   },
   "pie": {
     "entidad": "Asociación Río de Gracia · Costa Rica",
