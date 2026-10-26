@@ -268,6 +268,7 @@ function vistaInicio() {
       botonGrande('📢', 'Enviar un anuncio', 'A tu grupo', "irPublicar('anuncio')") +
       botonGrande('📋', 'Hacer una encuesta', 'Preguntas con opciones para tocar', "irPublicar('encuesta')") +
       botonGrande('👥', '¿Quién respondió?', 'Quién va, quién no y quién falta', "mostrar('actividades')") +
+      (datos.usuario.supervision ? botonGrande('✈️', 'Visita de misioneros', 'Anotarla y recibir recordatorios', "irPublicar('visita')") : '') +
       '</div>' + (proximas ? '<h2 style="margin:16px 6px 8px;font-size:1.05rem">Tus próximas actividades</h2>' + proximas : '');
   }
   let html = '';
@@ -312,7 +313,7 @@ function vistaPublicar() {
       <button data-tipo="encuesta">📋 Encuesta</button>
     </div>
     ${datos.finanzas ? '<button class="secundario" data-tipo="factura" id="btn-factura">🧾 Subir una factura</button>' : ''}
-    ${datos.usuario.verTodo ? '<button class="secundario" data-tipo="visita" id="btn-visita">✈️ Anotar visita de misioneros</button>' : ''}
+    ${datos.usuario.supervision ? '<button class="secundario" data-tipo="visita" id="btn-visita">✈️ Anotar visita de misioneros</button>' : ''}
 
     <div id="f-grupos"><label>¿A qué grupo(s)?</label><div class="opciones">${grupos || '<div class="vacio">No hay grupos activados.</div>'}</div></div>
 
@@ -472,7 +473,7 @@ async function verReporte() {
 
 function irPublicar(tipo) {
   mostrar('publicar');
-  const b = document.querySelector(`#tipos [data-tipo="${tipo}"]`);
+  const b = document.querySelector(`[data-tipo="${tipo}"]`);
   if (b) b.click();
 }
 
