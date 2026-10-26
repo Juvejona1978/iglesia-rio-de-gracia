@@ -67,6 +67,26 @@
     .grande small { display: block; font-weight: 400; color: var(--suave); font-size: .85rem; }
     .reporte { white-space: pre-wrap; font-size: .95rem; }
     .volver { background: none; color: var(--boton); width: auto; padding: 4px 0; margin: 0 0 6px; }
+    .entrar { max-width: 420px; margin: 40px auto; text-align: center; }
+    .entrar p { color: var(--suave); }
+
+    /* Computadora: menú a la izquierda y tarjetas en columnas. */
+    @media (min-width: 900px) {
+      body { padding: 0 0 0 220px; }
+      header { padding: 22px 32px; }
+      header h1 { font-size: 1.5rem; }
+      nav { top: 0; bottom: 0; right: auto; width: 220px; flex-direction: column; justify-content: flex-start; gap: 4px;
+        border-top: 0; border-right: 1px solid rgba(127,127,127,.2); padding: 24px 12px; }
+      nav::before { content: "⛰️ Río de Gracia"; font-weight: 700; color: var(--boton); padding: 0 12px 16px; }
+      nav button { flex: 0 0 auto; flex-direction: row; justify-content: flex-start; gap: 12px; font-size: 1rem; padding: 12px; border-radius: 12px; }
+      nav button span { font-size: 1.3rem; }
+      nav button.activo { background: var(--fondo2); }
+      main { max-width: 1200px; padding: 24px 32px; }
+      #contenido { columns: 2 420px; column-gap: 16px; }
+      #contenido > * { break-inside: avoid; }
+      #contenido > .aviso, #contenido > .volver, #contenido > .grandes, #contenido > .entrar { column-span: all; }
+      .grandes { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    }
   </style>
 </head>
 <body>
@@ -94,7 +114,7 @@ async function api(accion, extra) {
   const r = await fetch(API, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // sin "preflight": Apps Script no lo atiende
-    body: JSON.stringify(Object.assign({ accion, initData: tg ? tg.initData : '' }, extra || {}))
+    body: JSON.stringify(Object.assign({ accion, initData: dentroDeTelegram() ? tg.initData : '', login: sesionWeb() }, extra || {}))
   });
   return r.json();
 }
@@ -108,25 +128,66 @@ function aviso(texto, tipo) {
   setTimeout(() => div.remove(), 7000);
 }
 
+function dentroDeTelegram() { return !!(tg && tg.initData); }
+
+/** En el navegador (computadora), la sesión del botón "Iniciar sesión con Telegram" se guarda una semana. */
+function sesionWeb() {
+  try {
+    const s = JSON.parse(localStorage.getItem('rdg-sesion') || 'null');
+    return s && Date.now() / 1000 - s.auth_date < 7 * 86400 ? s : null;
+  } catch (e) { return null; }
+}
+
+function alEntrar(usuario) {
+  try { localStorage.setItem('rdg-sesion', JSON.stringify(usuario)); } catch (e) {}
+  cargar();
+}
+
+function salir() {
+  try { localStorage.removeItem('rdg-sesion'); } catch (e) {}
+  location.reload();
+}
+
+function pedirInicioDeSesion() {
+  $('#saludo').textContent = 'Panel de líderes';
+  $('#navegacion').classList.add('oculto');
+  $('#contenido').innerHTML = `<div class="tarjeta entrar"><h2>Entra con tu cuenta de Telegram</h2>
+    <p>Es la misma cuenta con la que usas el Asistente Río de Gracia. No necesitas contraseña nueva.</p><div id="boton-telegram"></div>
+    <p style="font-size:.85rem">En el teléfono también puedes abrirlo desde el bot, con el botón 📊 Panel.</p></div>`;
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://telegram.org/js/telegram-widget.js?22';
+  s.setAttribute('data-telegram-login', 'AsistenteJuntaRDGbot');
+  s.setAttribute('data-size', 'large');
+  s.setAttribute('data-radius', '12');
+  s.setAttribute('data-onauth', 'alEntrar(user)');
+  $('#boton-telegram').appendChild(s);
+}
+
 async function cargar() {
-  if (!tg || !tg.initData) {
-    $('#saludo').textContent = 'Abre este panel desde el bot de Telegram.';
-    $('#contenido').innerHTML = '<div class="tarjeta vacio">Para usar el panel, abre <b>@AsistenteJuntaRDGbot</b> en Telegram y toca <b>📊 Abrir el panel</b>.</div>';
-    return;
+  if (dentroDeTelegram()) {
+    tg.ready();
+    tg.expand();
+  } else if (!sesionWeb()) {
+    return pedirInicioDeSesion();
   }
-  tg.ready();
-  tg.expand();
+  $('#contenido').innerHTML = '<div class="tarjeta vacio">Cargando tu información…</div>';
   try {
     datos = await api('datos');
   } catch (e) {
     datos = { error: 'No pude conectarme. Revisa tu internet e intenta de nuevo.' };
+  }
+  if (datos.error && !dentroDeTelegram() && /verificar/.test(datos.error)) {
+    try { localStorage.removeItem('rdg-sesion'); } catch (e) {}
+    return pedirInicioDeSesion();
   }
   if (datos.error) {
     $('#saludo').textContent = '';
     $('#contenido').innerHTML = '<div class="tarjeta vacio">' + esc(datos.error) + '</div>';
     return;
   }
-  $('#saludo').textContent = 'Hola, ' + datos.usuario.nombre.split(' ')[0] + ' 👋';
+  $('#saludo').innerHTML = 'Hola, ' + esc(datos.usuario.nombre.split(' ')[0]) + ' 👋' +
+    (dentroDeTelegram() ? '' : ' · <a href="#" onclick="salir();return false" style="color:#fff">Salir</a>');
   armarNavegacion();
   mostrar(seccion);
 }
@@ -481,6 +542,7 @@ function vistaMas() {
       <span class="chip">${g.mensajes} msj · ${g.activos} 👤</span></div>`).join('') + '</div>';
   }
   html += '<button class="secundario" onclick="recargar()">🔄 Actualizar</button>';
+  if (!dentroDeTelegram()) html += '<button class="secundario" onclick="salir()">🚪 Cerrar sesión en esta computadora</button>';
   return html;
 }
 
