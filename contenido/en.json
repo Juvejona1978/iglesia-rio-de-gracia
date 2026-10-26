@@ -215,6 +215,7 @@
     "estatutos_p": "<span class='pendiente'>Bylaws, legal standing certificate or other documents the board decides to publish: pending.</span>",
     "invitacion_t": "Walk with us",
     "invitacion_p": "The Río de Gracia Association opens its doors to all who share this vision of exalting God, loving our neighbor and seeing lives transformed. We invite you to be part of what God is doing in our community.",
-    "volver": "Back to home"
+    "volver": "Back to home",
+    "junta_publicar": "<span class='pendiente'>sí</span>"
   }
 }

@@ -215,6 +215,7 @@
     "estatutos_p": "<span class='pendiente'>Estatutos, personería jurídica u otros documentos que la junta decida publicar: pendientes.</span>",
     "invitacion_t": "Camina con nosotros",
     "invitacion_p": "La Asociación Río de Gracia abre sus puertas a todos los que comparten esta visión de exaltar a Dios, amar al prójimo y ver vidas transformadas. Te invitamos a ser parte de lo que Dios está haciendo en nuestra comunidad.",
-    "volver": "Volver al inicio"
+    "volver": "Volver al inicio",
+    "junta_publicar": "<span class='pendiente'>sí</span>"
   }
 }

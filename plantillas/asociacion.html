@@ -77,20 +77,20 @@
           <article class="tarjeta">
             <h3>{{ asociacion.entidad_t }}</h3>
             <p><strong>{{ asociacion.entidad_nombre }}</strong><br>{{ asociacion.entidad_pais }}</p>
-            <p>{{ asociacion.entidad_cedula }}</p>
+            <!-- si asociacion.entidad_cedula --><p>{{ asociacion.entidad_cedula }}</p><!-- fin -->
             <p>{{ asociacion.entidad_sede }}</p>
           </article>
-          <article class="tarjeta">
+          <!-- si asociacion.junta_publicar --><article class="tarjeta">
             <h3>{{ asociacion.junta_t }}</h3>
             <dl class="junta">
               <dt>{{ asociacion.presidente_c }}</dt><dd>{{ asociacion.presidente_n }}</dd>
               <dt>{{ asociacion.vice_c }}</dt><dd>{{ asociacion.vice_n }}</dd>
               <dt>{{ asociacion.secretaria_c }}</dt><dd>{{ asociacion.secretaria_n }}</dd>
               <dt>{{ asociacion.tesorera_c }}</dt><dd>{{ asociacion.tesorera_n }}</dd>
-              <dt>{{ asociacion.fiscal_c }}</dt><dd>{{ asociacion.fiscal_n }}</dd>
+              <!-- si asociacion.fiscal_n --><dt>{{ asociacion.fiscal_c }}</dt><dd>{{ asociacion.fiscal_n }}</dd><!-- fin -->
             </dl>
-            <p class="nota">{{ asociacion.junta_nota }}</p>
-          </article>
+            <!-- si asociacion.junta_nota --><p class="nota">{{ asociacion.junta_nota }}</p><!-- fin -->
+          </article><!-- fin -->
           <article class="tarjeta">
             <h3>{{ asociacion.proteccion_t }}</h3>
             <p>{{ asociacion.proteccion_p }}</p>
@@ -101,10 +101,10 @@
               <li>{{ asociacion.proteccion_4 }}</li>
             </ul>
           </article>
-          <article class="tarjeta">
+          <!-- si asociacion.estatutos_p --><article class="tarjeta">
             <h3>{{ asociacion.estatutos_t }}</h3>
             <p>{{ asociacion.estatutos_p }}</p>
-          </article>
+          </article><!-- fin -->
         </div>
       </div>
     </section>
