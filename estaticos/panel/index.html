@@ -195,6 +195,7 @@ async function cargar() {
 /** Qué tipo de panel ve esta persona: cada quien solo lo suyo. */
 function perfil() {
   const u = datos.usuario;
+  if (u.soloConsulta) return 'miembro';
   if (u.rol === 'admin') return 'admin';
   if (u.funcion === 'tesoreria') return 'tesoreria';
   if (u.rol === 'junta') return 'junta';
@@ -207,7 +208,8 @@ const PESTANAS_POR_PERFIL = {
   tesoreria: ['inicio', 'finanzas'],
   junta: ['inicio', 'actividades', 'publicar', 'finanzas', 'mas'],
   liderazgo: ['inicio', 'actividades', 'publicar', 'oracion', 'mas'],
-  lider: ['inicio', 'actividades']
+  lider: ['inicio', 'actividades'],
+  miembro: ['inicio']
 };
 
 function armarNavegacion() {
@@ -251,7 +253,28 @@ function botonGrande(icono, titulo, detalle, accion) {
   return `<button class="grande" onclick="${accion}"><span>${icono}</span><div>${titulo}<small>${detalle}</small></div></button>`;
 }
 
+function tarjetaHorarios() {
+  return '<div class="tarjeta"><h2>🕐 Horarios</h2>' + (datos.horarios || []).map((h) =>
+    `<div class="fila"><b>${esc(h.nombre)}</b><span class="meta">${esc(h.cuando)}</span></div>`).join('') + '</div>';
+}
+
+function tarjetaVisitas() {
+  if (!datos.visitas || !datos.visitas.length) return '';
+  return '<div class="tarjeta"><h2>✈️ Visitas de misioneros</h2>' + datos.visitas.map((v) =>
+    `<div class="fila"><div><b>${esc(v.equipo || 'Equipo misionero')}</b>${v.iglesia ? ' · ' + esc(v.iglesia) : ''}
+    <div class="meta">🛬 ${esc(v.llegada)}${v.salida ? ' · 🛫 ' + esc(v.salida) : ''}</div>
+    ${v.actividades ? `<div class="meta">📋 ${esc(v.actividades)}</div>` : ''}</div></div>`).join('') + '</div>';
+}
+
 function vistaInicio() {
+  if (perfil() === 'miembro') {
+    const acts = datos.actividades.map((a) => `<div class="fila"><div><b>${esc(a.titulo)}</b>
+      <div class="meta">${esc(a.fechaLarga)}${a.hora ? ' · ' + esc(a.hora) : ''}${a.lugar ? ' · 📍 ' + esc(a.lugar) : ''}</div></div></div>`).join('');
+    return tarjetaHorarios() +
+      '<div class="tarjeta"><h2>🗓️ Próximas actividades</h2>' + (acts || '<div class="vacio">No hay actividades próximas.</div>') + '</div>' +
+      tarjetaVisitas() +
+      '<a class="btn" href="https://riodegraciacr.org" target="_blank" style="display:block;text-align:center;text-decoration:none">🌐 Ir a la página web</a>';
+  }
   if (perfil() === 'tesoreria') {
     return '<div class="grandes">' +
       botonGrande('📷', 'Subir una factura', 'Toma la foto y yo leo el monto', "formulario('factura')") +
