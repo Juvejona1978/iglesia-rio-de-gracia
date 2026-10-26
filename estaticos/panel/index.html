@@ -61,6 +61,12 @@
     .oculto { display: none !important; }
     .respondida { opacity: .7; }
     .foto-previa { max-width: 100%; border-radius: 12px; margin-top: 8px; }
+    .grandes { display: grid; gap: 10px; }
+    .grande { display: flex; align-items: center; gap: 14px; text-align: left; margin: 0; padding: 18px 16px; font-size: 1.1rem; background: var(--fondo); color: var(--texto); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+    .grande span { font-size: 1.8rem; }
+    .grande small { display: block; font-weight: 400; color: var(--suave); font-size: .85rem; }
+    .reporte { white-space: pre-wrap; font-size: .95rem; }
+    .volver { background: none; color: var(--boton); width: auto; padding: 4px 0; margin: 0 0 6px; }
   </style>
 </head>
 <body>
@@ -125,10 +131,29 @@ async function cargar() {
   mostrar(seccion);
 }
 
+/** Qué tipo de panel ve esta persona: cada quien solo lo suyo. */
+function perfil() {
+  const u = datos.usuario;
+  if (u.rol === 'admin') return 'admin';
+  if (u.funcion === 'tesoreria') return 'tesoreria';
+  if (u.rol === 'junta') return 'junta';
+  if (u.rol === 'liderazgo') return 'liderazgo';
+  return 'lider';
+}
+
+const PESTANAS_POR_PERFIL = {
+  admin: ['inicio', 'actividades', 'publicar', 'finanzas', 'oracion', 'mas'],
+  tesoreria: ['inicio', 'finanzas'],
+  junta: ['inicio', 'actividades', 'publicar', 'finanzas', 'mas'],
+  liderazgo: ['inicio', 'actividades', 'publicar', 'oracion', 'mas'],
+  lider: ['inicio', 'actividades']
+};
+
 function armarNavegacion() {
-  const items = [['inicio', '🏠', 'Inicio'], ['actividades', '📅', 'Actividades'], ['publicar', '✍️', 'Publicar']];
-  if (datos.finanzas) items.push(['finanzas', '💰', 'Finanzas']);
-  items.push(['oracion', '🙏', 'Oración'], ['mas', '☰', 'Más']);
+  const nombres = { inicio: ['🏠', 'Inicio'], actividades: ['📅', 'Actividades'], publicar: ['✍️', 'Publicar'],
+    finanzas: ['💰', 'Finanzas'], oracion: ['🙏', 'Oración'], mas: ['☰', 'Más'] };
+  const items = PESTANAS_POR_PERFIL[perfil()].filter((id) => id !== 'finanzas' || datos.finanzas)
+    .map((id) => [id, nombres[id][0], nombres[id][1]]);
   $('#navegacion').innerHTML = items.map(([id, icono, nombre]) =>
     `<button data-ir="${id}" class="${id === seccion ? 'activo' : ''}"><span>${icono}</span>${nombre}</button>`).join('');
   $('#navegacion').classList.remove('oculto');
@@ -161,7 +186,29 @@ function tarjetaActividad(a, completa) {
   </div>`;
 }
 
+function botonGrande(icono, titulo, detalle, accion) {
+  return `<button class="grande" onclick="${accion}"><span>${icono}</span><div>${titulo}<small>${detalle}</small></div></button>`;
+}
+
 function vistaInicio() {
+  if (perfil() === 'tesoreria') {
+    return '<div class="grandes">' +
+      botonGrande('📷', 'Subir una factura', 'Toma la foto y yo leo el monto', "formulario('factura')") +
+      botonGrande('➕', 'Anotar ofrenda o venta', 'Lo que entró a la iglesia', "formulario('entrada')") +
+      botonGrande('➖', 'Anotar un gasto', 'Lo que se pagó o compró', "formulario('salida')") +
+      botonGrande('🏦', 'Depósito o retiro del banco', 'Cuando llevas o sacas dinero', "formulario('banco')") +
+      botonGrande('📄', 'Ver el reporte del mes', 'Todo ordenado, listo para presentar', 'verReporte()') +
+      '</div>';
+  }
+  if (perfil() === 'lider') {
+    const proximas = datos.actividades.slice(0, 3).map((a) => tarjetaActividad(a, false)).join('');
+    return '<div class="grandes">' +
+      botonGrande('📅', 'Nueva actividad', 'Se anuncia, se fija y se recuerda sola', "irPublicar('actividad')") +
+      botonGrande('📢', 'Enviar un anuncio', 'A tu grupo', "irPublicar('anuncio')") +
+      botonGrande('📋', 'Hacer una encuesta', 'Preguntas con opciones para tocar', "irPublicar('encuesta')") +
+      botonGrande('👥', '¿Quién respondió?', 'Quién va, quién no y quién falta', "mostrar('actividades')") +
+      '</div>' + (proximas ? '<h2 style="margin:16px 6px 8px;font-size:1.05rem">Tus próximas actividades</h2>' + proximas : '');
+  }
   let html = '';
   const prox = datos.actividades.slice(0, 3);
   html += `<div class="tarjeta"><h2>📅 Próximas actividades</h2>${prox.length ? prox.map((a) =>
@@ -303,6 +350,69 @@ async function enviarPublicacion() {
     aviso('No pude enviarlo. Revisa tu internet e intenta de nuevo.', 'error');
   }
   boton.disabled = false;
+}
+
+/* ---------- Formularios de un solo paso ---------- */
+
+const FORMULARIOS = {
+  entrada: ['➕ Ofrenda o venta', '¿Cuánto entró y de qué?', 'Por ejemplo: 85000 ofrenda del sábado'],
+  salida: ['➖ Gasto', '¿Cuánto se gastó y en qué?', 'Por ejemplo: 12500 productos de limpieza'],
+  banco: ['🏦 Depósito o retiro', '¿Fue depósito o retiro? ¿Cuánto y por qué?', 'Por ejemplo: depósito de 150000 de las ofrendas de octubre']
+};
+
+function formulario(tipo) {
+  const volver = '<button class="volver" onclick="mostrar(\'inicio\')">← Volver</button>';
+  if (tipo === 'factura') {
+    $('#contenido').innerHTML = volver + `<div class="tarjeta"><h2>📷 Subir una factura</h2>
+      <input type="file" id="foto" accept="image/*" capture="environment">
+      <img id="previa" class="foto-previa oculto" alt="Vista previa de la factura">
+      <label>Nota (opcional)</label><input type="text" id="nota" placeholder="Por ejemplo: compra para el festival">
+      <button id="enviar">Subir factura</button></div>`;
+    $('#foto').onchange = () => { const f = $('#foto').files[0]; if (f) { $('#previa').src = URL.createObjectURL(f); $('#previa').classList.remove('oculto'); } };
+    $('#enviar').onclick = async () => {
+      const f = $('#foto').files[0];
+      if (!f) return aviso('Toma o elige la foto de la factura.', 'error');
+      await enviarSimple($('#enviar'), 'factura', { imagen: await fotoComoBase64(f), tipo: 'image/jpeg', nota: $('#nota').value });
+    };
+  } else {
+    const [titulo, pregunta, ejemplo] = FORMULARIOS[tipo];
+    $('#contenido').innerHTML = volver + `<div class="tarjeta"><h2>${titulo}</h2>
+      <label>${pregunta}</label><textarea id="texto" placeholder="${ejemplo}"></textarea>
+      <button id="enviar">Anotar</button></div>`;
+    $('#enviar').onclick = () => {
+      if (!$('#texto').value.trim()) return aviso('Escribe el monto y el concepto.', 'error');
+      enviarSimple($('#enviar'), 'movimiento', { tipo, texto: $('#texto').value });
+    };
+  }
+  window.scrollTo(0, 0);
+}
+
+async function enviarSimple(boton, accion, extra) {
+  boton.disabled = true; boton.textContent = 'Enviando…';
+  try {
+    const r = await api(accion, extra);
+    if (r.error) { aviso(r.error, 'error'); boton.disabled = false; boton.textContent = 'Intentar de nuevo'; return; }
+    tg && tg.HapticFeedback && tg.HapticFeedback.notificationOccurred('success');
+    datos = await api('datos');
+    mostrar('inicio');
+    aviso(r.mensaje || 'Listo.', 'exito');
+  } catch (e) {
+    aviso('No pude enviarlo. Revisa tu internet e intenta de nuevo.', 'error');
+    boton.disabled = false; boton.textContent = 'Intentar de nuevo';
+  }
+}
+
+async function verReporte() {
+  $('#contenido').innerHTML = '<div class="tarjeta vacio">Preparando el reporte…</div>';
+  const r = await api('reporte', {});
+  $('#contenido').innerHTML = '<button class="volver" onclick="mostrar(\'inicio\')">← Volver</button>' +
+    '<div class="tarjeta reporte">' + (r.error ? esc(r.error) : r.html) + '</div>';
+}
+
+function irPublicar(tipo) {
+  mostrar('publicar');
+  const b = document.querySelector(`#tipos [data-tipo="${tipo}"]`);
+  if (b) b.click();
 }
 
 function vistaFinanzas() {
