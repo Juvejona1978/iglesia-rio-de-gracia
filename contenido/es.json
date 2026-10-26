@@ -134,7 +134,7 @@
     "servir_t": "Ven a servir",
     "servir_p": "Si tu iglesia o tu equipo quiere visitarnos para servir, con gusto coordinamos juntos.",
     "dar_t": "Apoya un proyecto",
-    "dar_p": "<span class='pendiente'>Datos para donaciones: pendientes de confirmar.</span>"
+    "dar_p": "Estamos terminando los trámites para habilitar las cuentas de la asociación. Mientras tanto, si deseas apoyar alguno de nuestros proyectos, escríbenos y con gusto te contamos cómo."
   },
   "contacto": {
     "titulo": "Escríbenos",
@@ -142,7 +142,8 @@
     "correo_t": "Correo",
     "whatsapp_t": "WhatsApp",
     "facebook_t": "Facebook",
-    "telegram_t": "Telegram"
+    "telegram_t": "Telegram",
+    "youtube_t": "YouTube"
   },
   "pie": {
     "entidad": "Asociación Río de Gracia · Costa Rica",

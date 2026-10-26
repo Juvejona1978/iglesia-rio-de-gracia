@@ -134,7 +134,7 @@
     "servir_t": "Come and serve",
     "servir_p": "If your church or team would like to visit and serve, we'd love to plan it together.",
     "dar_t": "Support a project",
-    "dar_p": "<span class='pendiente'>Giving details: to be confirmed.</span>"
+    "dar_p": "We are finishing the paperwork to open the association's bank accounts. In the meantime, if you'd like to support one of our projects, send us a message and we'll gladly tell you how."
   },
   "contacto": {
     "titulo": "Get in touch",
@@ -142,7 +142,8 @@
     "correo_t": "Email",
     "whatsapp_t": "WhatsApp",
     "facebook_t": "Facebook",
-    "telegram_t": "Telegram"
+    "telegram_t": "Telegram",
+    "youtube_t": "YouTube"
   },
   "pie": {
     "entidad": "Asociación Río de Gracia · Costa Rica",
