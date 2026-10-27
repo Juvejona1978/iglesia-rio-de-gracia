@@ -561,6 +561,15 @@ function vistaMas() {
       `<div class="fila"><div><b>${esc(g.grupo)}</b><div class="meta">${g.top.map((t) => esc(t.nombre) + ' (' + t.mensajes + ')').join(', ') || '—'}</div></div>
       <span class="chip">${g.mensajes} msj · ${g.activos} 👤</span></div>`).join('') + '</div>';
   }
+  if (datos.colaboracion) {
+    const c = datos.colaboracion;
+    html += `<div class="tarjeta"><h2>🙋 Colaboración · Maestras</h2><div class="meta">${c.llamados} ${c.llamados === 1 ? 'llamado' : 'llamados'} en los últimos 90 días${c.enGrupo ? ' · ' + c.enGrupo + ' en el grupo (con el bot)' : ''}</div>` +
+      (c.llamados ? c.personas.map((p) =>
+        `<div class="fila"><div><b>${esc(p.nombre)}</b><div class="meta">🙋 ${p.si} · 🙅 ${p.no} · sin responder ${p.sinResponder}</div></div>
+        <span class="chip">${Math.round(100 * p.si / c.llamados)} %</span></div>`).join('') +
+        '<div class="meta">Solo aparecen las personas que el bot conoce: las que escribieron en el grupo o activaron el asistente.</div>'
+      : '<div class="vacio">Todavía no hay llamados. Cuando se pregunte en el grupo quién puede ayudar, el bot pone los botones.</div>') + '</div>';
+  }
   html += '<button class="secundario" onclick="recargar()">🔄 Actualizar</button>';
   if (!dentroDeTelegram()) html += '<button class="secundario" onclick="salir()">🚪 Cerrar sesión en esta computadora</button>';
   return html;
