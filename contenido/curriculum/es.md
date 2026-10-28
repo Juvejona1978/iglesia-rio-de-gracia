@@ -8,7 +8,7 @@ Material de trabajo para Iglesia Río de Gracia. Primera versión para revisión
 
 **Duración sugerida:** 50–60 minutos. Bienvenida y repaso, 5; caso inicial, 7; lectura y explicación bíblica, 15; conversación, 10; actividad y hoja, 15; cierre y oración, 5. Es posible reducir la actividad para una clase de 45 minutos.
 
-**Materiales:** Biblia, hojas, lápices y pizarra. Leer los textos en la traducción que usa la iglesia. Las explicaciones de esta guía son paráfrasis, no citas de la Biblia Verbo; comprobar el texto antes de preparar hojas con citas literales. La referencia para memorizar permite escoger el versículo en esa misma traducción.
+**Materiales:** Biblia, hojas, lápices y pizarra. Los versículos para memorizar se citan literalmente de la Biblia Verbo (edición revisada 2026), que también está en las hojas del alumno. Las explicaciones de esta guía son paráfrasis para enseñar; al leer los pasajes completos en clase, usar la Biblia Verbo o la traducción de la iglesia.
 
 **Para enseñar:** comenzar preguntando y escuchar antes de corregir. Pedir siempre «¿por qué?» y volver al pasaje. Para 8–9 años, leer juntos y permitir dibujos o respuestas orales; para 10–12, pedir una razón y una objeción. No solicitar confesiones públicas ni detalles personales. Los casos son ficticios. Un niño puede abstenerse de compartir. No usar amenazas, presión emocional ni una oración repetida como prueba de salvación. Si pregunta por su fe, conversar con cuidado y acompañar con su familia según el protocolo de la iglesia.
 
@@ -36,7 +36,7 @@ Material de trabajo para Iglesia Río de Gracia. Primera versión para revisión
 
 ## 1 · Dios: santo, justo y bueno
 
-**Meta:** distinguir el carácter de Dios de mis gustos. **Leer:** Deuteronomio 32:4; Salmo 119:68; Isaías 6:1–5. **Memoria:** Deuteronomio 32:4.
+**Meta:** distinguir el carácter de Dios de mis gustos. **Leer:** Deuteronomio 32:4; Salmo 119:68; Isaías 6:1–5. **Memoria:** Deuteronomio 32:4: «Él es la Roca; su obra es perfecta y todos sus caminos son justos. Es Dios fiel, sin injusticia; él es justo y recto.»
 
 **Caso inicial.** En un juego, la árbitra cambia la regla para que gane su hija. La hija dice: «¡Qué buena es mi mamá!». El otro equipo protesta. Pregunta: «¿Ayudarme a ganar convierte una decisión en buena? ¿Quién está pensando solo en lo que le conviene?».
 
@@ -54,7 +54,7 @@ Un niño puede llamar «bueno» a quien le da todo lo que quiere. Pero permitir 
 
 ## 2 · Hechos a su imagen
 
-**Meta:** explicar por qué todas las personas poseen dignidad y responsabilidad ante Dios. **Leer:** Génesis 1:26–31; Santiago 3:9–10. **Memoria:** Génesis 1:27.
+**Meta:** explicar por qué todas las personas poseen dignidad y responsabilidad ante Dios. **Leer:** Génesis 1:26–31; Santiago 3:9–10. **Memoria:** Génesis 1:27: «Y creó Dios al hombre a su imagen, a imagen de Dios lo creó; varón y hembra los creó.»
 
 **Caso inicial.** Dos estudiantes eligen equipo. Dejan al compañero que corre más lento y dicen: «No sirve». ¿Han medido su habilidad para correr o el valor de su persona?
 
@@ -72,7 +72,7 @@ Fuimos creados para amar a Dios y al prójimo, cuidar lo que nos confía y vivir
 
 ## 3 · El pecado y el corazón
 
-**Meta:** reconocer que el pecado incluye deseos y decisiones contra Dios, además de acciones visibles. **Leer:** Génesis 3:1–13; Marcos 7:20–23. **Memoria:** Romanos 3:23.
+**Meta:** reconocer que el pecado incluye deseos y decisiones contra Dios, además de acciones visibles. **Leer:** Génesis 3:1–13; Marcos 7:20–23. **Memoria:** Romanos 3:23: «Ya que todos pecaron y están destituidos de la gloria de Dios,»
 
 **Caso inicial.** Andrés rompe un trabajo de su hermana para que ella no reciba una felicitación. Luego dice que fue un accidente. ¿Comenzó el problema cuando rompió el papel o antes?
 
@@ -90,7 +90,7 @@ Todos necesitamos perdón. Compararnos con alguien peor no nos vuelve inocentes.
 
 ## 4 · Los mandamientos: amor y espejo
 
-**Meta:** conectar la ley con el carácter de Dios y comprender que no puede salvarnos por nuestro desempeño. **Leer:** Éxodo 20:1–17; Mateo 22:34–40; Romanos 3:19–20. **Memoria:** Mateo 22:39.
+**Meta:** conectar la ley con el carácter de Dios y comprender que no puede salvarnos por nuestro desempeño. **Leer:** Éxodo 20:1–17; Mateo 22:34–40; Romanos 3:19–20. **Memoria:** Mateo 22:39: «Y el segundo es semejante a este: Amarás a tu prójimo como a ti mismo.»
 
 **Caso inicial.** Una niña se mira al espejo y descubre barro en su cara. Frota el espejo para limpiarse. ¿Qué puede mostrar el espejo? ¿Qué no puede hacer?
 
@@ -108,7 +108,7 @@ La ley también muestra nuestro pecado; Romanos dice que por ella lo conocemos. 
 
 ## 5 · Justicia y misericordia
 
-**Meta:** comprender por qué ignorar el mal no es justicia y por qué el culpable necesita misericordia. **Leer:** Romanos 2:1–4; 3:23–26. **Memoria:** Romanos 3:26.
+**Meta:** comprender por qué ignorar el mal no es justicia y por qué el culpable necesita misericordia. **Leer:** Romanos 2:1–4; 3:23–26. **Memoria:** Romanos 3:26: «Con el fin de manifestar su justicia en este tiempo presente, para que él sea justo, y quien justifica al que tiene fe en Jesús.»
 
 **Caso inicial.** Alguien destruye la bicicleta de una compañera. El encargado sabe lo ocurrido, pero dice: «Soy tan bueno que no haré nada». ¿Ha cuidado a la compañera? ¿Se resolvió el mal?
 
@@ -126,7 +126,7 @@ Misericordia es compasión hacia quien está en necesidad; al hablar del culpabl
 
 ## 6 · Dios promete bendición y rescate
 
-**Meta:** conectar relatos bíblicos dentro del plan de Dios que llega a Cristo. **Leer:** Génesis 12:1–3; 15:1–6; Gálatas 3:7–9, 16. **Memoria:** Génesis 12:3.
+**Meta:** conectar relatos bíblicos dentro del plan de Dios que llega a Cristo. **Leer:** Génesis 12:1–3; 15:1–6; Gálatas 3:7–9, 16. **Memoria:** Génesis 12:3: «Bendeciré a quienes te bendigan y maldeciré a quien te maldiga. En ti serán benditas todas las familias de la tierra”.»
 
 **Caso inicial.** En un libro alguien lee solo páginas sueltas: un viaje, una familia, un rey. Cree que son historias sin relación. ¿Qué le falta para comprender el libro?
 
@@ -144,7 +144,7 @@ La historia continúa con Israel, el éxodo, la ley, el reino de David y los pro
 
 ## 7 · El rescate y la necesidad de un sacrificio mejor
 
-**Meta:** entender que la Pascua y los sacrificios preparan para comprender a Cristo, sin atribuirles poder salvador independiente. **Leer:** Éxodo 12:1–14; Juan 1:29; Hebreos 10:1–14. **Memoria:** Juan 1:29.
+**Meta:** entender que la Pascua y los sacrificios preparan para comprender a Cristo, sin atribuirles poder salvador independiente. **Leer:** Éxodo 12:1–14; Juan 1:29; Hebreos 10:1–14. **Memoria:** Juan 1:29: «Al día siguiente, Juan vio a Jesús que venía hacia él, y dijo: “¡Miren, el Cordero de Dios, que quita el pecado del mundo!»
 
 **Caso inicial.** Una señal anuncia que un puente está más adelante. Un viajero abraza la señal y dice que ya cruzó el río. ¿Para qué sirve la señal y por qué no es el puente?
 
@@ -162,7 +162,7 @@ Los sacrificios enseñaban la gravedad del pecado y la necesidad de acercarse a 
 
 ## 8 · Jesús: verdadero Dios y verdadero hombre
 
-**Meta:** explicar por qué Jesús puede revelar a Dios y ser nuestro Redentor. **Leer:** Juan 1:1–18; Marcos 2:1–12; Hebreos 4:15. **Memoria:** Juan 1:14.
+**Meta:** explicar por qué Jesús puede revelar a Dios y ser nuestro Redentor. **Leer:** Juan 1:1–18; Marcos 2:1–12; Hebreos 4:15. **Memoria:** Juan 1:14: «Y el Verbo se hizo carne y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad.»
 
 **Caso inicial.** Un espectador grita instrucciones a un equipo, pero no entra al partido. Pregunta: «¿Qué diferencia hay entre aconsejar desde fuera y entrar para ayudar?». Aclarar que Jesús hace mucho más que ayudar en un juego.
 
@@ -180,7 +180,7 @@ En Marcos 2, Jesús perdona pecados y sana al paralítico mostrando su autoridad
 
 ## 9 · La cruz y la resurrección
 
-**Meta:** relacionar la muerte de Jesús con nuestros pecados y su resurrección con una esperanza real. **Leer:** Isaías 53:4–6; Juan 10:17–18; 1 Corintios 15:1–8, 17–22. **Memoria:** 1 Corintios 15:3–4.
+**Meta:** relacionar la muerte de Jesús con nuestros pecados y su resurrección con una esperanza real. **Leer:** Isaías 53:4–6; Juan 10:17–18; 1 Corintios 15:1–8, 17–22. **Memoria:** 1 Corintios 15:3–4: «Porque primeramente les enseñé lo que también recibí: que Cristo murió por nuestros pecados, conforme a las Escrituras; que fue sepultado, y que resucitó al tercer día, conforme a las Escrituras;»
 
 **Caso inicial.** Un amigo rompe algo tuyo. Tú lo perdonas y pagas su reparación. El daño no dejó de existir: alguien asumió un costo. ¿Qué muestra esto sobre el perdón? La comparación no explica por completo la cruz.
 
@@ -198,7 +198,7 @@ Jesús murió realmente, fue sepultado y resucitó corporalmente. Pablo menciona
 
 ## 10 · El amor que conocemos en Cristo
 
-**Meta:** definir el amor por el carácter y la obra de Dios y distinguirlo de agrado, permisividad o intercambio. **Leer:** 1 Juan 4:7–11; Juan 15:9–13; 1 Corintios 13:4–7. **Memoria:** 1 Juan 4:10.
+**Meta:** definir el amor por el carácter y la obra de Dios y distinguirlo de agrado, permisividad o intercambio. **Leer:** 1 Juan 4:7–11; Juan 15:9–13; 1 Corintios 13:4–7. **Memoria:** 1 Juan 4:10: «En esto consiste el amor: no en que nosotros hayamos amado a Dios, sino en que él nos amó a nosotros y envió a su Hijo en propiciación por nuestros pecados.»
 
 **Caso inicial.** Un amigo te pide que mientas para encubrir que lastimó a otro. Dice: «Si me quisieras, lo harías». ¿Amarlo significa ayudarlo a seguir haciendo daño?
 
@@ -216,7 +216,7 @@ Primera Corintios dice que el amor se goza de la verdad y no de la injusticia. P
 
 ## 11 · La gracia, el arrepentimiento y la fe
 
-**Meta:** distinguir la salvación recibida por gracia de los intentos de merecerla. **Leer:** Efesios 2:1–10; Marcos 1:14–15; Lucas 18:9–14. **Memoria:** Efesios 2:8–9.
+**Meta:** distinguir la salvación recibida por gracia de los intentos de merecerla. **Leer:** Efesios 2:1–10; Marcos 1:14–15; Lucas 18:9–14. **Memoria:** Efesios 2:8–9: «Porque por gracia han sido salvados, mediante la fe; y esto no procede de ustedes, pues es don de Dios, no por obras, para que nadie se gloríe.»
 
 **Caso inicial.** Alguien recibe un regalo y quiere pagar para poder decir: «Me lo gané». ¿Qué cambia si lo convierte en salario? ¿Puede una mano vacía recibir algo valioso?
 
@@ -234,7 +234,7 @@ Arrepentirse es reconocer el pecado y volverse a Dios, en vez de defenderlo o bu
 
 ## 12 · Una vida nueva que aprende a amar
 
-**Meta:** entender que la obediencia nace de la gracia y se expresa en cambios concretos, sin exigir perfección instantánea. **Leer:** Lucas 19:1–10; Gálatas 5:22–23; 1 Juan 1:8–9. **Memoria:** Efesios 2:10.
+**Meta:** entender que la obediencia nace de la gracia y se expresa en cambios concretos, sin exigir perfección instantánea. **Leer:** Lucas 19:1–10; Gálatas 5:22–23; 1 Juan 1:8–9. **Memoria:** Efesios 2:10: «Porque somos hechura suya, creados en Cristo Jesús para buenas obras, las cuales Dios preparó de antemano para que anduviéramos en ellas.»
 
 **Caso inicial.** Una niña dice que pidió perdón por tomar un cuaderno, pero se lo queda. Otra cree que devolverlo obligará a Dios a perdonarla. ¿Qué confusión tiene cada una?
 
@@ -252,7 +252,7 @@ La vida cristiana no consiste solo en esforzarnos solos. El Espíritu produce fr
 
 ## 13 · La historia completa y nuestra esperanza
 
-**Meta:** narrar el evangelio conectando creación, caída, promesa, Cristo y nueva creación. **Leer:** Apocalipsis 21:1–5; Efesios 2:19–22; 1 Corintios 15:20–22. **Memoria:** Apocalipsis 21:4.
+**Meta:** narrar el evangelio conectando creación, caída, promesa, Cristo y nueva creación. **Leer:** Apocalipsis 21:1–5; Efesios 2:19–22; 1 Corintios 15:20–22. **Memoria:** Apocalipsis 21:4: «Dios enjugará toda lágrima de sus ojos. Ya no habrá muerte, ni habrá más llanto, clamor ni dolor, porque las primeras cosas han pasado”.»
 
 **Caso inicial.** Una historia termina con un rescate, pero nadie cuenta qué pasó con las personas rescatadas. ¿Qué falta? La Biblia lleva el rescate hacia una vida con Dios y una creación renovada.
 
