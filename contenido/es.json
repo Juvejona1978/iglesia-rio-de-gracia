@@ -110,7 +110,10 @@
     "glomos_t": "Programa Glomos",
     "glomos_p": "Junto con Global Action ofrecemos el programa de formación teológica Glomos. Está abierto a líderes y miembros de otras iglesias de la zona, porque creemos que lo que aprendemos es para compartirlo.",
     "estudios_t": "Estudios bíblicos",
-    "estudios_p": "Abrimos la Biblia juntos de forma sencilla. No necesitas saber mucho: solo traer tus preguntas y ganas de aprender."
+    "estudios_p": "Abrimos la Biblia juntos de forma sencilla. No necesitas saber mucho: solo traer tus preguntas y ganas de aprender.",
+    "curriculum_t": "Currículos de escuela dominical",
+    "curriculum_p": "Clases bíblicas para consultar, usar e imprimir. Comienza con La gran historia de Dios: 13 semanas para niños de 8 a 12 años, en español e inglés.",
+    "curriculum_boton": "Ver los currículos"
   },
   "visita": {
     "titulo": "Visítanos",

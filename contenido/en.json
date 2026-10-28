@@ -110,7 +110,10 @@
     "glomos_t": "Glomos program",
     "glomos_p": "Together with Global Action we offer Glomos, a theological training program. It's open to leaders and members of other churches in the area, because what we learn is meant to be shared.",
     "estudios_t": "Bible studies",
-    "estudios_p": "We open the Bible together in a simple way. You don't need to know much: just bring your questions and a desire to learn."
+    "estudios_p": "We open the Bible together in a simple way. You don't need to know much: just bring your questions and a desire to learn.",
+    "curriculum_t": "Sunday school curricula",
+    "curriculum_p": "Bible lessons to read, use, and print. Start with God’s Great Story: 13 weeks for children ages 8–12, in Spanish and English.",
+    "curriculum_boton": "View the curricula"
   },
   "visita": {
     "titulo": "Visit us",

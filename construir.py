@@ -17,6 +17,7 @@ import json
 import os
 import re
 import shutil
+from curriculum import construir_curriculum
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent
@@ -106,6 +107,7 @@ def construir():
             destino.write_text(html, "utf-8")
 
     urls = [f"{DOMINIO}/{c}{'' if p == 'index.html' else p}" for c in IDIOMAS.values() for p in PAGINAS]
+    urls.extend(construir_curriculum(RAIZ, SALIDA))
     (SALIDA / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
