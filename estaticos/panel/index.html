@@ -331,7 +331,7 @@ function vistaPublicar() {
     <h2>✍️ ¿Qué quieres publicar?</h2>
     <div class="segmentos" id="tipos">
       <button data-tipo="actividad" class="activo">📅 Actividad</button>
-      <button data-tipo="anuncio">📢 Anuncio</button>
+      <button data-tipo="anuncio">✉️ Mensaje / anuncio</button>
       <button data-tipo="encuesta">📋 Encuesta</button>
     </div>
     ${datos.usuario.supervision ? '<button class="secundario" data-tipo="visita" id="btn-visita">✈️ Anotar visita de misioneros</button>' : ''}
@@ -419,20 +419,22 @@ async function enviarPublicacion() {
     if (!$('#texto').value.trim()) return aviso('Escribe el mensaje.', 'error');
     pedido = ['publicar', { grupos, texto: $('#texto').value, tipo: tipoPublicar, fijar: $('#fijar').checked }];
   }
+  const etiquetaBoton = boton.textContent;
   boton.disabled = true; boton.textContent = 'Enviando…';
   try {
     const r = await api(pedido[0], pedido[1]);
     if (r.error) { aviso(r.error, 'error'); }
     else {
       tg && tg.HapticFeedback && tg.HapticFeedback.notificationOccurred('success');
-      datos = await api('datos');
       mostrar('publicar');
       aviso(r.mensaje || 'Listo.', 'exito');
     }
   } catch (e) {
-    aviso('No pude enviarlo. Revisa tu internet e intenta de nuevo.', 'error');
+    aviso('No pude confirmar el envío. Revisa el grupo de Telegram antes de reintentar para evitar duplicados.', 'error');
+  } finally {
+    boton.disabled = false;
+    boton.textContent = etiquetaBoton;
   }
-  boton.disabled = false;
 }
 
 /* ---------- Formularios de un solo paso ---------- */
